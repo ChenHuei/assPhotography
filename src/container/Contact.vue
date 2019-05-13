@@ -1,21 +1,16 @@
 <template>
-  <div class="home">
-    <Topbar/>
+  <div class="contact">
+    <h2>contact</h2>
   </div>
 </template>
 
 <script>
-import { Topbar } from '../components'
 export default {
-  name: 'home',
-  components: {
-    Topbar
-  }
+  name: 'Contact'
 }
 </script>
+
 <style lang="scss" scoped>
 @import '../styles/import';
-.home {
 
-}
 </style>

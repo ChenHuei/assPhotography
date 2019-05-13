@@ -7,8 +7,19 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: () => import('@/views/Home')
+      component: () => import('@/views/Ass'),
+      children: [
+        {
+          path: '',
+          name: 'home',
+          component: () => import('@/container/Home')
+        },
+        {
+          path: '/contact',
+          name: 'contact',
+          component: () => import('@/container/Contact')
+        }
+      ]
     }
   ]
 })

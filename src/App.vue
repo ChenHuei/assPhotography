@@ -16,6 +16,5 @@ export default {
 #app {
   @include size(100vw, 100vh);
   font-family: $font-family;
-  color: color(black);
 }
 </style>
