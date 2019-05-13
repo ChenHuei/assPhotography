@@ -1,18 +1,13 @@
 <template>
-  <div class="button">
-    
-  </div>
+  <nav class="topbar">
+    <h2>ASS CHEN</h2>
+    <div class="icons"></div>
+  </nav>
 </template>
 
 <script>
 export default {
-  name: 'button',
-  props: {
-    title: {
-      type: String,
-      require: true
-    }
-  }
+  name: 'topbar'
 }
 </script>
 

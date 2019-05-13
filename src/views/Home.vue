@@ -1,16 +1,15 @@
 <template>
   <div class="home">
-    <h2>{{msg}}</h2>
+    <Topbar/>
   </div>
 </template>
 
 <script>
+import { Topbar } from '../components'
 export default {
   name: 'home',
-  data () {
-    return {
-      msg: 'ass'
-    }
+  components: {
+    Topbar
   }
 }
 </script>
