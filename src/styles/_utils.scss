@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900');
+
+$font-family: 'Roboto', sans-serif;
+
+$colors: (
+  blue: #1A73E8,
+  grey: #DADCE0,
+  grey_light: #EFF1F2,
+  red: #FF0000,
+  red_light: #FCE4E2,
+  red_dark: #D93025,
+  white: #fff,
+  black: #202124
+);
+
+@function color($color-item) {
+  @return map-get($colors, $color-item)
+};
+
+@mixin size($w, $h:$w) {
+  width: $w;
+  height: $h;
+};
+
+@mixin flexCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin fixed {
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+
+@mixin backgroundImage($url) {
+  background-image: url($url);
+  @include bgi;
+}
+
+@mixin bgi {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+@mixin border($color, $size: .1rem) {
+  border: $size solid color($color);
+}
