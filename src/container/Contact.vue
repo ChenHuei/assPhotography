@@ -15,12 +15,20 @@
             v-for="link in AUTHOR.links"
             :key="link.name"
             :href="link.url"
-            target="_blank">
+            :target="targetHandler(link.tag)">
             <font-awesome-icon
               :icon="iconHandler(link)"
               :class="iconClassHandler(link.tag)"/>
             <span>{{link.name}}</span>
           </a>
+        </div>
+        <div class="description">
+          <div
+            class="row"
+            v-for="row in AUTHOR.description"
+            :key="row">
+            {{row}}
+          </div>
         </div>
       </div>
     </div>
@@ -51,6 +59,9 @@ export default {
     iconClassHandler (tag) {
       const center = tag === 'mobile-alt' || tag === 'facebook-f'
       return { center }
+    },
+    targetHandler (tag) {
+      return tag === 'envelope' ? '' : '_blank'
     }
   }
 }
@@ -68,7 +79,7 @@ export default {
     justify-content: space-between;
     max-width: 960px;
     > .left, > .right {
-      @include size(50%, 400px);
+      @include size(50%, 420px);
       padding: 24px;
     }
     > .left {
@@ -99,7 +110,7 @@ export default {
           cursor: pointer;
           > svg {
             margin-right: 12px;
-            font-size: 24px;
+            font-size: 20px;
             &.center {
               margin: 0 16px 0 2px;
             }
@@ -112,6 +123,16 @@ export default {
           }
           &:hover {
             color: color(blue);
+          }
+        }
+      }
+      > .description {
+        margin-top: 16px;
+        > .row {
+          font-size: 14px;
+          line-height: 24px;
+          &:last-child {
+            line-height: 60px;
           }
         }
       }

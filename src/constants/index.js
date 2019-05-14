@@ -25,8 +25,11 @@ export const ITEMS = [
 
 export const AUTHOR = {
   name: '陳俊宇',
-  englishName: 'Jun-Yu Chen',
+  englishName: 'Chun-Yu Chen',
   cover,
+  description: [
+    'Freelance Photographer', '品牌 / 形象 / 網拍 / 婚紗 / 雜誌 / 訪問 / 寫真', '不限制任何形式的合作，歡迎討論。'
+  ],
   links: [
     {
       name: '俊宇',
@@ -47,15 +50,15 @@ export const AUTHOR = {
       url: 'https://www.instagram.com/ass_photography/?hl=zh-tw'
     },
     {
-      name: '0922-224-479',
+      name: '+886 922-224-479',
       isBrand: false,
       tag: 'mobile-alt'
     },
     {
-      name: 'aaa830714@gmail.com',
+      name: 'supersmile821031@gmail.com',
       isBrand: false,
       tag: 'envelope',
-      url: 'mailto:aaa830714@gmail.com'
+      url: 'mailto:supersmile821031@gmail.com'
     }
   ]
 }
