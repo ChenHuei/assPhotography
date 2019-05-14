@@ -1,3 +1,5 @@
+import cover from '../assets/cover.jpg'
+
 export const SCREEN_SIZES = [1400, 960, 640]
 
 export const ICONS = [
@@ -20,6 +22,43 @@ export const ITEMS = [
     link: '/contact'
   }
 ]
+
+export const AUTHOR = {
+  name: '陳俊宇',
+  englishName: 'Jun-Yu Chen',
+  cover,
+  links: [
+    {
+      name: '俊宇',
+      isBrand: true,
+      tag: 'line',
+      url: 'https://line.me/zh-hant/'
+    },
+    {
+      name: 'ASS Photography Studio',
+      isBrand: true,
+      tag: 'facebook-f',
+      url: 'https://www.facebook.com/assphotofromtaiwan/'
+    },
+    {
+      name: 'ass_photography',
+      isBrand: true,
+      tag: 'instagram',
+      url: 'https://www.instagram.com/ass_photography/?hl=zh-tw'
+    },
+    {
+      name: '0922-224-479',
+      isBrand: false,
+      tag: 'mobile-alt'
+    },
+    {
+      name: 'aaa830714@gmail.com',
+      isBrand: false,
+      tag: 'envelope',
+      url: 'mailto:aaa830714@gmail.com'
+    }
+  ]
+}
 
 export const DATA = [
   {

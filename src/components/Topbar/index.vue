@@ -1,6 +1,6 @@
 <template>
   <nav class="topbar">
-    <h2>ASS PHOTOGRAPHY</h2>
+    <h2 @click="goHome">ASS PHOTOGRAPHY</h2>
     <div class="icons">
       <a
         class="icon"
@@ -39,6 +39,9 @@ export default {
         prefix: 'fab',
         iconName: name
       }
+    },
+    goHome () {
+      this.$router.push({ name: 'home' })
     }
   }
 }
@@ -55,6 +58,7 @@ export default {
   > h2 {
     margin: 0;
     font-size: 32px;
+    cursor: pointer;
   }
   > .icons {
     margin: 32px 0;
