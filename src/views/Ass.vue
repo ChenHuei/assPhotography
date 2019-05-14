@@ -22,5 +22,11 @@ export default {
   @include size(100%);
   color: color(white);
   background-color: color(black);
+  > .container {
+    @include size(100%, auto);
+    min-height: calc(100% - 240px);
+    padding: 0 20px 80px;
+    box-sizing: border-box;
+  }
 }
 </style>
