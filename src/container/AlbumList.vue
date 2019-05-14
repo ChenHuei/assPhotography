@@ -1,10 +1,11 @@
 <template>
-  <div class="album">
+  <div class="albums">
     <div class="list">
-      <div
+      <router-link
         class="item"
         v-for="item in ALBUMS"
-        :key="item.name">
+        :key="item.name"
+        :to="routerLinkHanlder(item.id)">
         <div
           class="cover"
           :style="coverStyleHandler(item)"
@@ -12,7 +13,7 @@
           @mouseleave="leaveHandler"></div>
         <div class="name">{{item.name}}</div>
         <div class="time">{{item.time}}</div>
-      </div>
+      </router-link>
     </div>
   </div>
 </template>
@@ -20,7 +21,7 @@
 <script>
 import { ALBUMS } from '../constants'
 export default {
-  name: 'Album',
+  name: 'Albums',
   data () {
     return {
       isHover: false,
@@ -42,6 +43,9 @@ export default {
     },
     leaveHandler () {
       this.isHover = false
+    },
+    routerLinkHanlder (id) {
+      return `/albums/${id}`
     }
   }
 }
@@ -49,7 +53,7 @@ export default {
 
 <style lang="scss" scoped>
 @import '../styles/import';
-.album {
+.albums {
   @include size(100%, auto);
   > .list {
     @include flexCenter;
@@ -61,6 +65,8 @@ export default {
     > .item {
       @include size(calc(25% - 24px), 280px);
       margin: 0 24px 48px 0;
+      color: color(white);
+      text-decoration: none;
       transition: .5s;
       cursor: pointer;
       &:hover {

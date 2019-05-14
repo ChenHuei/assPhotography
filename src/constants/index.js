@@ -18,8 +18,8 @@ export const HOME_ITEMS = [
     link: '/'
   },
   {
-    name: 'Album',
-    link: '/album'
+    name: 'Albums',
+    link: '/albums'
   },
   {
     name: 'Contact',

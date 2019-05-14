@@ -20,9 +20,14 @@ export default new Router({
           component: () => import('@/container/Photo')
         },
         {
-          path: 'album',
+          path: 'albums',
+          name: 'albums',
+          component: () => import('@/container/AlbumList')
+        },
+        {
+          path: 'albums/:id',
           name: 'album',
-          component: () => import('@/container/Album')
+          component: () => import('@/container/AlbumItem')
         },
         {
           path: 'contact',
