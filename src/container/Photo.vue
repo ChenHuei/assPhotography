@@ -10,17 +10,17 @@
 </template>
 
 <script>
-import { DATA } from '../constants'
+import { PHOTOS } from '../constants'
 export default {
   name: 'Photo',
   data () {
     return {
       photo: {},
-      DATA
+      PHOTOS
     }
   },
   mounted () {
-    this.photo = this.DATA.find(item => item.id === parseInt(this.$route.params.id))
+    this.photo = this.PHOTOS.find(item => item.id === parseInt(this.$route.params.id))
   }
 }
 </script>

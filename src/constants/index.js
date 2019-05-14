@@ -2,7 +2,7 @@ import cover from '../assets/cover.jpg'
 
 export const SCREEN_SIZES = [1400, 960, 640]
 
-export const ICONS = [
+export const HOME_ICONS = [
   {
     name: 'facebook-f',
     link: 'https://www.facebook.com/assphotofromtaiwan/'
@@ -12,10 +12,14 @@ export const ICONS = [
     link: 'https://www.instagram.com/ass_photography/?hl=zh-tw'
   }
 ]
-export const ITEMS = [
+export const HOME_ITEMS = [
   {
     name: 'Home',
     link: '/'
+  },
+  {
+    name: 'Album',
+    link: '/album'
   },
   {
     name: 'Contact',
@@ -63,7 +67,7 @@ export const AUTHOR = {
   ]
 }
 
-export const DATA = [
+export const PHOTOS = [
   {
     id: 1,
     url: 'https://images.unsplash.com/photo-1556228720-d7519e2b88df?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80',

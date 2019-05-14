@@ -4,7 +4,7 @@
     <div class="icons">
       <a
         class="icon"
-        v-for="icon in ICONS"
+        v-for="icon in HOME_ICONS"
         :key="icon.name"
         :href="icon.link"
         target="_blank">
@@ -14,7 +14,7 @@
     <div class="items">
       <router-link
         class="item"
-        v-for="item in ITEMS"
+        v-for="item in HOME_ITEMS"
         :key="item.name"
         :to="item.link">
         {{item.name}}
@@ -24,13 +24,13 @@
 </template>
 
 <script>
-import { ICONS, ITEMS } from '../../constants'
+import { HOME_ICONS, HOME_ITEMS } from '../../constants'
 export default {
   name: 'topbar',
   data () {
     return {
-      ICONS,
-      ITEMS
+      HOME_ICONS,
+      HOME_ITEMS
     }
   },
   methods: {

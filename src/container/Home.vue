@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { DATA, SCREEN_SIZES } from '../constants'
+import { PHOTOS, SCREEN_SIZES } from '../constants'
 export default {
   name: 'Home',
   data () {
@@ -29,7 +29,7 @@ export default {
       rowNumber: 0,
       screenWidth: document.body.clientWidth,
       list: [],
-      DATA,
+      PHOTOS,
       SCREEN_SIZES
     }
   },
@@ -58,7 +58,7 @@ export default {
   mounted () {
     window.addEventListener('resize', this.resize)
     this.resize()
-    this.list = this.DATA
+    this.list = this.PHOTOS
   },
   beforeDestroy () {
     window.removeEventListener('resize', this.resize)
