@@ -15,7 +15,12 @@ export default new Router({
           component: () => import('@/container/Home')
         },
         {
-          path: '/contact',
+          path: 'photo/:id',
+          name: 'photo',
+          component: () => import('@/container/Photo')
+        },
+        {
+          path: 'contact',
           name: 'contact',
           component: () => import('@/container/Contact')
         }
