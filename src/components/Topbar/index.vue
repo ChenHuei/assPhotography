@@ -1,6 +1,10 @@
 <template>
   <nav class="topbar">
-    <h2 @click="goHome">ASS PHOTOGRAPHY</h2>
+    <div
+      class="title"
+      @click="goHome">
+      ASS PHOTOGRAPHY
+    </div>
     <div class="icons">
       <a
         class="icon"
@@ -65,11 +69,15 @@ export default {
   @include size(100%, 240px);
   @include flexCenter;
   flex-direction: column;
-  padding: 32px;
+  padding: 48px 32px 32px;
   box-sizing: border-box;
-  > h2 {
-    margin: 0;
-    font-size: 32px;
+  > .title {
+    @include size(100%, auto);
+    @include flexCenter;
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 40px;
+    letter-spacing: 2px;
     cursor: pointer;
   }
   > .icons {
@@ -108,6 +116,22 @@ export default {
       }
       &:last-child {
         margin-right: 0;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 659px) {
+  .topbar {
+    > .title {
+      font-size: 24px;
+    }
+    > .icons {
+      margin: 24px 0;
+    }
+    > .items {
+      > a {
+        margin-right: 16px;
       }
     }
   }

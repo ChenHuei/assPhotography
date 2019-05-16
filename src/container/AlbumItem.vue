@@ -59,7 +59,7 @@ export default {
   @include size(100%, auto);
   @include flexCenter;
   flex-direction: column;
-  padding: 48px 15% 0;
+  padding: 0 15%;
   cursor: pointer;
   > .title {
     @include size(100%, auto);

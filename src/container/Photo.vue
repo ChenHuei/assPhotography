@@ -31,7 +31,7 @@ export default {
   @include size(100%);
   @include flexCenter;
   flex-direction: column;
-  padding: 20px;
+  padding: 16px 32px;
   box-sizing: border-box;
   > .image {
     @include size(100%);
@@ -48,6 +48,12 @@ export default {
     @include flexCenter;
     justify-content: flex-start;
     max-width: 960px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .photo {
+    padding: 0 16px 16px;
   }
 }
 </style>

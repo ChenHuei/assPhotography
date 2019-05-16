@@ -72,7 +72,8 @@ export default {
 .contact {
   @include size(100%);
   @include flexCenter;
-  margin-top: 48px;
+  margin-top: 16px;
+  padding: 0 10%;
   > .author {
     @include size(100%, auto);
     @include flexCenter;
@@ -115,6 +116,9 @@ export default {
               margin: 0 16px 0 2px;
             }
           }
+          > span {
+            font-size: 16px;
+          }
           // 修飾 mail icon 比例不同造成文字不對齊的距離
           &:last-child {
             > svg {
@@ -139,12 +143,49 @@ export default {
     }
   }
 }
-@media screen and (max-width: 959px) {
+
+@media screen and (min-width: 660px) and (max-width: 800px) {
   .contact {
+    margin: 0;
     > .author {
       flex-direction: column;
       > .left, > .right {
         @include size(100%, 420px);
+      }
+      > .left {
+        padding: 0 24px;
+        margin-bottom: 24px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 659px) {
+  .contact {
+    margin: 0;
+    padding: 0;
+    > .author {
+      flex-direction: column;
+      > .left, > .right {
+        @include size(100%, 420px);
+      }
+      > .left {
+        padding: 0 24px;
+        margin-bottom: 24px;
+      }
+      > .right {
+        > .links {
+          > a {
+            > span {
+              font-size: 13px;
+            }
+          }
+        }
+        > .description {
+          > .row {
+            font-size: 10px;
+          }
+        }
       }
     }
   }

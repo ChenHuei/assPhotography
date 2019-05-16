@@ -111,4 +111,18 @@ export default {
     }
   }
 }
+
+@media screen and (max-width: 800px) {
+  .home {
+    > .row {
+      > a {
+        &:first-child {
+          > figure {
+            margin: 0 16px 16px;
+          }
+        }
+      }
+    }
+  }
+}
 </style>

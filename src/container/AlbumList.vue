@@ -55,12 +55,12 @@ export default {
 @import '../styles/import';
 .albums {
   @include size(100%, auto);
+  padding-top: 16px;
   > .list {
     @include flexCenter;
     justify-content: flex-start;
     flex-wrap: wrap;
     padding: 0 10%;
-    margin-top: 48px;
     overflow: hidden;
     > .item {
       @include size(calc(25% - 24px), 280px);
@@ -93,6 +93,7 @@ export default {
 
 @media screen and (min-width: 660px) and (max-width: 800px) {
   .albums {
+    padding-top: 0;
     > .list {
       > .item {
         @include size(calc(50% - 12px), 280px);
@@ -105,6 +106,7 @@ export default {
 }
 @media screen and (max-width: 659px) {
   .albums {
+    padding-top: 0;
     > .list {
       > .item {
         @include size(100%, 280px);
