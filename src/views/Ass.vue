@@ -1,6 +1,6 @@
 <template>
   <div class="ass">
-    <Topbar/>
+    <Topbar :active="active"/>
     <div class="container">
       <router-view :key="$route.fullPath"/>
     </div>
@@ -11,15 +11,24 @@
 import { Topbar } from '../components'
 export default {
   name: 'ass',
+  data () {
+    return {
+      active: ''
+    }
+  },
   components: {
     Topbar
+  },
+  mounted () {
+    this.active = this.$route.name
   }
 }
 </script>
 <style lang="scss" scoped>
 @import '../styles/import';
 .ass {
-  @include size(100%);
+  @include size(100%, auto);
+  min-height: 100%;
   color: color(white);
   background-color: color(black);
   > .container {

@@ -13,10 +13,10 @@
     </div>
     <div class="items">
       <router-link
-        class="item"
         v-for="item in HOME_ITEMS"
         :key="item.name"
-        :to="item.link">
+        :to="item.link"
+        :class="itemClassHandler(item.path)">
         {{item.name}}
       </router-link>
     </div>
@@ -27,6 +27,12 @@
 import { HOME_ICONS, HOME_ITEMS } from '../../constants'
 export default {
   name: 'topbar',
+  props: {
+    active: {
+      type: String,
+      required: true
+    }
+  },
   data () {
     return {
       HOME_ICONS,
@@ -38,6 +44,12 @@ export default {
       return {
         prefix: 'fab',
         iconName: name
+      }
+    },
+    itemClassHandler (path) {
+      return {
+        item: true,
+        active: path.some(item => item === this.active)
       }
     },
     goHome () {
@@ -88,8 +100,11 @@ export default {
       transition: .5s;
       text-decoration: none;
       cursor: pointer;
-      &:hover {
+      &.active {
         color: color(blue);
+      }
+      &:hover {
+        opacity: .6;
       }
       &:last-child {
         margin-right: 0;
