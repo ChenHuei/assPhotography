@@ -30,7 +30,7 @@ export default {
   },
   methods: {
     onScroll () {
-      this.nowLocation = window.page
+      this.nowLocation = window.pageYOffset
     },
     navigateHandler () {
       const diff = Math.floor(this.nowLocation * 0.1)
