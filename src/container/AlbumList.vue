@@ -67,7 +67,6 @@ export default {
       margin: 0 24px 48px 0;
       color: color(white);
       text-decoration: none;
-      transition: .5s;
       cursor: pointer;
       &:hover {
         opacity: .6;

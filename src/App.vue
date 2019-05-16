@@ -14,7 +14,7 @@ export default {
 <style lang="scss">
 @import './styles/import';
 #app {
-  @include size(100vw, 100vh);
+  @include size(100%, 100vh);
   font-family: $font-family;
 }
 </style>
