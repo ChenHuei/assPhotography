@@ -139,4 +139,14 @@ export default {
     }
   }
 }
+@media screen and (max-width: 959px) {
+  .contact {
+    > .author {
+      flex-direction: column;
+      > .left, > .right {
+        @include size(100%, 420px);
+      }
+    }
+  }
+}
 </style>

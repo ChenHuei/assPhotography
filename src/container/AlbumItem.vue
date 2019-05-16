@@ -59,13 +59,14 @@ export default {
   @include size(100%, auto);
   @include flexCenter;
   flex-direction: column;
-  padding: 48px 20% 0;
+  padding: 48px 15% 0;
   cursor: pointer;
   > .title {
     @include size(100%, auto);
     margin-bottom: 24px;
     font-size: 32px;
     font-weight: 900;
+    line-height: 40px;
     text-align: center;
     letter-spacing: 1px;
   }

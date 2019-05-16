@@ -59,7 +59,7 @@ export default {
     @include flexCenter;
     justify-content: flex-start;
     flex-wrap: wrap;
-    padding: 0 calc(10% - 24px) 0 10%;
+    padding: 0 10%;
     margin-top: 48px;
     overflow: hidden;
     > .item {
@@ -86,6 +86,29 @@ export default {
         font-size: 12px;
         text-align: center;
         opacity: .6;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 660px) and (max-width: 800px) {
+  .albums {
+    > .list {
+      > .item {
+        @include size(calc(50% - 12px), 280px);
+        &:nth-child(2n+ 2) {
+          margin: 0 0 48px 0;
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 659px) {
+  .albums {
+    > .list {
+      > .item {
+        @include size(100%, 280px);
+        margin: 0 0 48px 0;
       }
     }
   }
