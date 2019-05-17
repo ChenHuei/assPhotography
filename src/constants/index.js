@@ -1,5 +1,15 @@
 import cover from '../assets/cover.jpg'
 
+export const firebaseConfig = {
+  apiKey: 'AIzaSyBHDZIKGTrxSWHPyI-SkDR6bq4mOiH_xsE',
+  authDomain: 'ass-photography-afe90.firebaseapp.com',
+  databaseURL: 'https://ass-photography-afe90.firebaseio.com',
+  projectId: 'ass-photography-afe90',
+  storageBucket: 'ass-photography-afe90.appspot.com',
+  messagingSenderId: '16164478242',
+  appId: '1:16164478242:web:acd7dd881b760f18'
+}
+
 export const SCREEN_SIZES = [1400, 960, 640]
 
 export const HOME_ICONS = [
@@ -12,6 +22,7 @@ export const HOME_ICONS = [
     link: 'https://www.instagram.com/ass_photography/?hl=zh-tw'
   }
 ]
+
 export const HOME_ITEMS = [
   {
     name: 'Home',

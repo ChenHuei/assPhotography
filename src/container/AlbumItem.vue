@@ -9,7 +9,7 @@
       <span>{{photo.description}}</span>
     </figure>
     <div
-      class="top"
+      class="button"
       @click="navigateHandler">
       <div class="icon"></div>
       <span>back to top</span>
@@ -97,7 +97,7 @@ export default {
       transition: .5s;
     }
   }
-  > .top {
+  > .button {
     @include size(calc(100% + 40%), 80px);
     @include flexCenter;
     transition: .5s;
