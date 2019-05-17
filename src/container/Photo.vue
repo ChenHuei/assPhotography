@@ -6,6 +6,12 @@
     <div class="description">
       {{photo.create}}
     </div>
+    <div
+      class="back"
+      @click="goHome">
+      <div class="icon"></div>
+      <span>back</span>
+    </div>
   </div>
 </template>
 
@@ -17,6 +23,11 @@ export default {
     return {
       photo: {},
       PHOTOS
+    }
+  },
+  methods: {
+    goHome () {
+      this.$router.push({ name: 'home' })
     }
   },
   mounted () {
@@ -48,6 +59,26 @@ export default {
     @include flexCenter;
     justify-content: flex-start;
     max-width: 960px;
+  }
+  > .back {
+    @include size(100%, auto);
+    @include flexCenter;
+    justify-content: flex-start;
+    margin-top: 48px;
+    transition: .5s;
+    cursor: pointer;
+    &:hover {
+      opacity: .6;
+    }
+    > .icon {
+      @include size(24px);
+      @include backgroundImage('../assets/back-to-top.svg');
+      transform: rotate(180deg);
+    }
+    > span {
+      margin-left: 8px;
+      text-transform: capitalize;
+    }
   }
 }
 

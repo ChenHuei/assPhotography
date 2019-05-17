@@ -101,6 +101,7 @@ export default {
     @include size(calc(100% + 40%), 80px);
     @include flexCenter;
     transition: .5s;
+    cursor: pointer;
     &:hover {
       opacity: .6;
     }
