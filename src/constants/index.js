@@ -10,6 +10,7 @@ export const firebaseConfig = {
   appId: '1:16164478242:web:acd7dd881b760f18'
 }
 
+export const PAGE_SIZE = 12
 export const SCREEN_SIZES = [1400, 960, 640]
 
 export const HOME_ICONS = [
