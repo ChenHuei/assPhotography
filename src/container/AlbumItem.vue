@@ -18,14 +18,13 @@
 </template>
 
 <script>
-import { ALBUMS } from '../constants'
+import { db } from '../main.js'
 export default {
   name: 'Album',
   data () {
     return {
       nowLocation: 0,
-      album: {},
-      ALBUMS
+      album: {}
     }
   },
   methods: {
@@ -44,7 +43,9 @@ export default {
     }
   },
   mounted () {
-    this.album = this.ALBUMS.find(item => item.id === parseInt(this.$route.params.id))
+    db.collection('albums').doc(this.$route.params.id).get().then(res => {
+      this.album = res.data()
+    })
     window.addEventListener('scroll', this.onScroll)
   },
   beforeDestroy () {

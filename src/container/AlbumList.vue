@@ -3,7 +3,7 @@
     <div class="list">
       <router-link
         class="item"
-        v-for="item in ALBUMS"
+        v-for="item in albums"
         :key="item.name"
         :to="routerLinkHanlder(item.id)">
         <div
@@ -19,22 +19,21 @@
 </template>
 
 <script>
-import { ALBUMS } from '../constants'
+import { db } from '../main.js'
 export default {
   name: 'Albums',
   data () {
     return {
       isHover: false,
       id: 0,
-      ALBUMS
+      albums: []
     }
   },
   methods: {
     coverStyleHandler (item) {
       const url = this.id === item.id ? this.isHover ? item.hover : item.cover : item.cover
       return {
-        'background': `center center url(${url}) no-repeat`,
-        'backgroundSize': 'cover'
+        'backgroundImage': `url(${url})`
       }
     },
     enterHandler (id) {
@@ -47,6 +46,15 @@ export default {
     routerLinkHanlder (id) {
       return `/albums/${id}`
     }
+  },
+  mounted () {
+    db.collection('albums').get().then(res => {
+      res.docs.forEach(({ id }) => {
+        db.collection('albums').doc(id).get().then(res => {
+          this.albums.push(res.data())
+        })
+      })
+    })
   }
 }
 </script>
@@ -76,6 +84,9 @@ export default {
       }
       > .cover {
         @include size(100%, 200px);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
       }
       > .name {
         margin: 32px 0 16px 0;
