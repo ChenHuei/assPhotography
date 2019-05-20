@@ -91,7 +91,7 @@ export default {
       left: 50%;
       bottom: 50%;
       transform: translatex(-50%) translateY(-50%);
-      color: color(white);
+      color: color(grey);
       font-size: 20px;
       letter-spacing: 1px;
       opacity: 0;

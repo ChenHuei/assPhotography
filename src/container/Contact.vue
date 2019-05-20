@@ -106,7 +106,7 @@ export default {
         > a {
           @include flexCenter;
           margin-bottom: 12px;
-          color: color(white);
+          color: color(grey);
           text-decoration: none;
           cursor: pointer;
           > svg {

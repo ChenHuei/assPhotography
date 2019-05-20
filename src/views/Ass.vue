@@ -24,12 +24,13 @@ export default {
   }
 }
 </script>
+
 <style lang="scss" scoped>
 @import '../styles/import';
 .ass {
   @include size(100%, auto);
   min-height: 100%;
-  color: color(white);
+  color: color(grey);
   background-color: color(black);
   > .container {
     @include size(100%, auto);

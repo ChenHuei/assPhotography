@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <div class="container">
+    <div class="photos">
       <div
         class="row"
         v-for="row in rowNumber"
@@ -111,7 +111,7 @@ export default {
   position: relative;
   display: flex;
   flex-direction: column;
-  > .container {
+  > .photos {
     @include size(100%, auto);
     display: flex;
     > .row {
@@ -146,7 +146,7 @@ export default {
           bottom: -48px;
           left: 16px;
           padding: 16px;
-          color: color(white);
+          color: color(grey);
           line-height: 24px;
           box-sizing: border-box;
           transition: .5s;
@@ -173,7 +173,7 @@ export default {
 
 @media screen and (max-width: 800px) {
   .home {
-    > .container {
+    > .photos {
       > .row {
         > a {
           &:first-child {

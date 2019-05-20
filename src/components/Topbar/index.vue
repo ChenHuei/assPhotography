@@ -90,7 +90,7 @@ export default {
       text-decoration: none;
       cursor: pointer;
       &:hover {
-        color: color(white);
+        color: color(grey);
       }
       &:last-child {
         margin-right: 0;
@@ -104,7 +104,7 @@ export default {
       padding: 8px 16px;
       margin-right: 24px;
       font-size: 16px;
-      color: color(white);
+      color: color(grey);
       transition: .5s;
       text-decoration: none;
       cursor: pointer;

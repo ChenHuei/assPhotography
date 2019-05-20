@@ -35,6 +35,11 @@ export default new Router({
           component: () => import('@/container/Contact')
         }
       ]
+    },
+    {
+      path: '/login',
+      name: 'name',
+      component: () => import('@/views/Login')
     }
   ]
 })
