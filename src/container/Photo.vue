@@ -16,13 +16,12 @@
 </template>
 
 <script>
-import { PHOTOS } from '../constants'
+import { db } from '../main.js'
 export default {
   name: 'Photo',
   data () {
     return {
-      photo: {},
-      PHOTOS
+      photo: {}
     }
   },
   methods: {
@@ -31,7 +30,9 @@ export default {
     }
   },
   mounted () {
-    this.photo = this.PHOTOS.find(item => item.id === parseInt(this.$route.params.id))
+    db.collection('photos').doc(this.$route.params.id).get().then(res => {
+      this.photo = res.data()
+    })
   }
 }
 </script>

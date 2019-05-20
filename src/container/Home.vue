@@ -21,7 +21,8 @@
 </template>
 
 <script>
-import { PHOTOS, SCREEN_SIZES } from '../constants'
+import { SCREEN_SIZES } from '../constants'
+import { db } from '../main.js'
 export default {
   name: 'Home',
   data () {
@@ -29,7 +30,6 @@ export default {
       rowNumber: 0,
       screenWidth: document.body.clientWidth,
       list: [],
-      PHOTOS,
       SCREEN_SIZES
     }
   },
@@ -56,9 +56,15 @@ export default {
     }
   },
   mounted () {
+    db.collection('photos').get().then(res => {
+      res.docs.forEach(({ id }) => {
+        db.collection('photos').doc(id).get().then(res => {
+          this.list.push(res.data())
+        })
+      })
+    })
     window.addEventListener('resize', this.resize)
     this.resize()
-    this.list = this.PHOTOS
   },
   beforeDestroy () {
     window.removeEventListener('resize', this.resize)
