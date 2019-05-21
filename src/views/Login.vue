@@ -6,15 +6,17 @@
         class="google"
         @click="googleLogin">
         <div class="icon"></div>
-        <span>Log in with Google</span>
+        <span>
+          Log in with Google
+        </span>
       </div>
       <div class="hr"></div>
       <div class="form">
         <input
           :class="inputClassHandler"
           type="text"
-          placeholder="Account"
-          v-model="email">
+          placeholder="Email"
+          v-model.trim="email">
         <input
           :class="inputClassHandler"
           type="password"
@@ -55,7 +57,9 @@ export default {
   },
   methods: {
     login () {
-      firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(user => {
+      firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(({ user }) => {
+        const { uid, email } = user
+        this.$store.commit('SET_USER', { uid, email })
         this.$router.replace('admin')
       }).catch(() => {
         this.isWarning = true

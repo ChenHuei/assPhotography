@@ -10,6 +10,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faEnvelope, faMobileAlt } from '@fortawesome/free-solid-svg-icons'
 import { faFacebookF, faInstagram, faLine } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import store from './store'
 
 library.add(faEnvelope, faMobileAlt, faFacebookF, faInstagram, faLine)
 
@@ -24,5 +25,6 @@ Vue.config.productionTip = false
 
 new Vue({
   router,
+  store,
   render: h => h(App)
 }).$mount('#app')
