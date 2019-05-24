@@ -1,20 +1,16 @@
 <template>
   <div class="admin">
-    <Searchbar/>
+    <router-view :key="$route.fullPath"/>
   </div>
 </template>
 
 <script>
-import { Searchbar } from '../components'
 export default {
   name: 'Admin',
   data () {
     return {
       uid: ''
     }
-  },
-  components: {
-    Searchbar
   },
   mounted () {
     this.uid = this.$store.getters.uid

@@ -1,6 +1,9 @@
 <template>
-  <div class="albums">
-    <div class="list">
+  <div class="list">
+    <Searchbar
+      :keyword="keyword"
+      @keywordChange="changeKeyword"/>
+    <div class="items">
       <router-link
         class="item"
         v-for="item in albums"
@@ -10,7 +13,8 @@
           class="cover"
           :style="coverStyleHandler(item)"
           @mouseenter="enterHandler(item.id)"
-          @mouseleave="leaveHandler"></div>
+          @mouseleave="leaveHandler">
+        </div>
         <div class="name">{{item.name}}</div>
         <div class="time">{{item.time}}</div>
       </router-link>
@@ -20,14 +24,19 @@
 
 <script>
 import { db } from '../main.js'
+import { Searchbar } from '../components'
 export default {
-  name: 'Albums',
+  name: 'AdminList',
   data () {
     return {
       isHover: false,
       id: 0,
+      keyword: '',
       albums: []
     }
+  },
+  components: {
+    Searchbar
   },
   methods: {
     coverStyleHandler (item) {
@@ -44,7 +53,10 @@ export default {
       this.isHover = false
     },
     routerLinkHanlder (id) {
-      return `/albums/${id}`
+      return `/admin/${id}`
+    },
+    changeKeyword (e) {
+      this.keyword = e
     }
   },
   mounted () {
@@ -61,19 +73,20 @@ export default {
 
 <style lang="scss" scoped>
 @import '../styles/import';
-.albums {
+.list {
   @include size(100%, auto);
-  padding-top: 16px;
-  > .list {
+  min-height: 100%;
+  overflow: hidden;
+  > .items {
+    @include size(100%, auto);
     @include flexCenter;
     justify-content: flex-start;
     flex-wrap: wrap;
-    padding: 0 10%;
-    overflow: hidden;
+    padding: 5% 10%;
     > .item {
       @include size(calc(25% - 24px), 280px);
       margin: 0 24px 48px 0;
-      color: color(grey);
+      color: color(black);
       text-decoration: none;
       cursor: pointer;
       &:hover {
@@ -97,31 +110,6 @@ export default {
         font-size: 12px;
         text-align: center;
         opacity: .6;
-      }
-    }
-  }
-}
-
-@media screen and (min-width: 660px) and (max-width: 800px) {
-  .albums {
-    padding-top: 0;
-    > .list {
-      > .item {
-        @include size(calc(50% - 12px), 280px);
-        &:nth-child(2n+ 2) {
-          margin: 0 0 48px 0;
-        }
-      }
-    }
-  }
-}
-@media screen and (max-width: 659px) {
-  .albums {
-    padding-top: 0;
-    > .list {
-      > .item {
-        @include size(100%, 280px);
-        margin: 0 0 48px 0;
       }
     }
   }

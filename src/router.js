@@ -22,13 +22,13 @@ export default new Router({
         },
         {
           path: 'albums',
-          name: 'albums',
-          component: () => import('@/container/AlbumList')
+          name: 'list',
+          component: () => import('@/container/List')
         },
         {
           path: 'albums/:id',
           name: 'album',
-          component: () => import('@/container/AlbumItem')
+          component: () => import('@/container/Album')
         },
         {
           path: 'contact',
@@ -44,8 +44,19 @@ export default new Router({
     },
     {
       path: '/admin',
-      name: 'admin',
       component: () => import('@/views/Admin'),
+      children: [
+        {
+          path: '',
+          name: 'adminList',
+          component: () => import('@/container/AdminList')
+        },
+        {
+          path: ':id',
+          name: 'adminAlbum',
+          component: () => import('@/container/AdminAlbum')
+        }
+      ],
       beforeEnter: (to, from, next) => {
         if (Object.keys(store.state.user).length === 0) {
           next('/')
