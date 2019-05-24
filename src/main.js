@@ -7,12 +7,12 @@ import 'firebase/firestore'
 
 import { firebaseConfig } from './constants'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faEnvelope, faMobileAlt } from '@fortawesome/free-solid-svg-icons'
+import { faEnvelope, faMobileAlt, faSearch } from '@fortawesome/free-solid-svg-icons'
 import { faFacebookF, faInstagram, faLine } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import store from './store'
 
-library.add(faEnvelope, faMobileAlt, faFacebookF, faInstagram, faLine)
+library.add(faEnvelope, faMobileAlt, faFacebookF, faInstagram, faLine, faSearch)
 
 Vue.use(VueFire)
 
