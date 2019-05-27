@@ -6,7 +6,7 @@
     <div class="items">
       <router-link
         class="item"
-        v-for="item in albums"
+        v-for="item in showAlbums"
         :key="item.name"
         :to="routerLinkHanlder(item.id)">
         <div
@@ -37,6 +37,13 @@ export default {
   },
   components: {
     Searchbar
+  },
+  computed: {
+    showAlbums () {
+      return this.albums.slice().filter(item => {
+        return item.name.toLowerCase().indexOf(this.keyword.toLowerCase()) > -1
+      })
+    }
   },
   methods: {
     coverStyleHandler (item) {
