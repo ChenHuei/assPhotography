@@ -58,8 +58,7 @@ export default {
   methods: {
     login () {
       firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(({ user }) => {
-        const { uid, email } = user
-        this.$store.commit('SET_USER', { uid, email })
+        window.localStorage.setItem('uid', user.uid)
         this.$router.replace('admin')
       }).catch(() => {
         this.isWarning = true

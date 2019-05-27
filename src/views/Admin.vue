@@ -13,7 +13,7 @@ export default {
     }
   },
   mounted () {
-    this.uid = this.$store.getters.uid
+    this.uid = window.localStorage.getItem('uid')
   }
 }
 </script>

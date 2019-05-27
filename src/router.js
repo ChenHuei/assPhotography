@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import store from './store.js'
 
 Vue.use(Router)
 
@@ -58,7 +57,7 @@ export default new Router({
         }
       ],
       beforeEnter: (to, from, next) => {
-        if (Object.keys(store.state.user).length === 0) {
+        if (window.localStorage.getItem('uid').length === 0) {
           next('/')
         } else {
           next()
