@@ -1,8 +1,6 @@
 <template>
   <div class="list">
-    <Searchbar
-      :keyword="keyword"
-      @keywordChange="changeKeyword"/>
+    <Searchbar :keyword.sync="keyword"/>
     <div class="items">
       <router-link
         class="item"
@@ -61,9 +59,6 @@ export default {
     },
     routerLinkHanlder (id) {
       return `/admin/${id}`
-    },
-    changeKeyword (e) {
-      this.keyword = e
     }
   },
   mounted () {

@@ -39,7 +39,7 @@ export default {
         return this.keyword
       },
       set (val) {
-        this.$emit('keywordChange', val)
+        this.$emit('update:keyword', val)
       }
     },
     searchClassHandler () {
