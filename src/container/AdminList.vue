@@ -88,7 +88,7 @@ export default {
     > .item {
       @include size(calc(25% - 24px), 280px);
       margin: 0 24px 48px 0;
-      color: color(black);
+      color: color(primary);
       text-decoration: none;
       cursor: pointer;
       &:hover {

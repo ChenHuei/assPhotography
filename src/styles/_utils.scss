@@ -6,10 +6,11 @@ $colors: (
   red: #F34A38,
   grey: #EEE,
   grey_dark: #333,
-  blue: #529ECC,
+  blue: #6384b3,
   blue_light: #EFF2F9,
   white: #FFF,
-  black: #111
+  black: #111,
+  primary: #89a3b2
 );
 
 @function color($color-item) {

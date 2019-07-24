@@ -96,13 +96,13 @@ export default {
       > .button {
         @include size(120px, 40px);
         @include flexCenter;
-        border: 1px solid color(black);
+        border: 1px solid color(primary);
         border-radius: 8px;
         transition: .5s;
         cursor: pointer;
         &:hover {
           color: color(white);
-          background-color: color(black);
+          background-color: color(primary);
         }
       }
     }

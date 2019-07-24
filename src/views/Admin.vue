@@ -23,6 +23,6 @@ export default {
 .admin {
   @include size(100%, auto);
   min-height: 100%;
-  color: color(black);
+  color: color(primary);
 }
 </style>

@@ -31,7 +31,7 @@ export default {
   @include size(100%, auto);
   min-height: 100%;
   color: color(grey);
-  background-color: color(black);
+  background-color: color(primary);
   > .container {
     @include size(100%, auto);
     min-height: calc(100% - 240px);

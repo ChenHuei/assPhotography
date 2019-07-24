@@ -81,7 +81,7 @@ export default {
 .login {
   @include size(100%);
   @include flexCenter;
-  color: color(black);
+  color: color(primary);
   > .block {
     @include size(376px, auto);
     @include flexCenter;
