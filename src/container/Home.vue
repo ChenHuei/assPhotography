@@ -6,24 +6,29 @@
         v-for="row in rowNumber"
         :key="row"
         :style="rowStyleHandler">
-        <router-link
-          v-for="item in rowData(row - 1)"
+        <div class="photo"
+          v-for="item in rowData(row)"
           :key="item.url"
-          :to="routerLinkHanlder(item.id)">
+          @click="openSinglePhoto(item)">
           <figure>
             <img :src="item.url">
           </figure>
           <div class="description">
             {{item.create}}
           </div>
-        </router-link>
+        </div>
       </div>
     </div>
     <div :class="loadingClassHandler"></div>
+    <SinglePhoto
+      v-if="isOpenSinglePhoto"
+      :photo="photo"
+      @back="clearPhoto"/>
   </div>
 </template>
 
 <script>
+import { SinglePhoto } from '../components'
 import { SCREEN_SIZES, PAGE_SIZE } from '../constants'
 import { db } from '../main.js'
 export default {
@@ -31,13 +36,18 @@ export default {
   data () {
     return {
       isLoading: true,
+      isShow: true,
       count: 0,
       rowNumber: 0,
       screenWidth: document.body.clientWidth,
+      photo: {},
       list: [],
       SCREEN_SIZES,
       PAGE_SIZE
     }
+  },
+  components: {
+    SinglePhoto
   },
   computed: {
     rowStyleHandler () {
@@ -56,6 +66,9 @@ export default {
     },
     endIndex () {
       return this.count * this.PAGE_SIZE
+    },
+    isOpenSinglePhoto () {
+      return Object.keys(this.photo).length > 0
     }
   },
   methods: {
@@ -74,7 +87,7 @@ export default {
       }
     },
     rowData (idx) {
-      return this.list.filter((item, index) => index % this.rowNumber === idx)
+      return this.list.filter((item, index) => index % this.rowNumber === idx - 1)
     },
     routerLinkHanlder (id) {
       return `/photo/${id}`
@@ -89,6 +102,12 @@ export default {
         })
         this.isLoading = false
       })
+    },
+    openSinglePhoto (photo) {
+      this.photo = photo
+    },
+    clearPhoto () {
+      this.photo = {}
     }
   },
   mounted () {
@@ -118,12 +137,11 @@ export default {
       @include size(auto);
       display: flex;
       flex-direction: column;
-      > a {
+      > .photo {
         @include size(100%, auto);
         position: relative;
         transition: .5s;
         overflow: hidden;
-        text-decoration: none;
         cursor: pointer;
         &:hover {
           > figure {
@@ -134,10 +152,12 @@ export default {
           }
         }
         > figure {
-          @include size(calc(100% - 32px), auto);
-          margin: 16px;
+          @include size(calc(100% - 16px), auto);
+          margin: 8px;
+          font-size: 0;
           > img {
             @include size(100%);
+            -webkit-filter:grayscale(1)
           }
         }
         > .description {
@@ -175,7 +195,7 @@ export default {
   .home {
     > .photos {
       > .row {
-        > a {
+        > .photo {
           &:first-child {
             > figure {
               margin: 0 16px 16px;
