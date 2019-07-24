@@ -1,12 +1,19 @@
 <template>
   <div class="album">
-    <div class="title">{{album.name}}</div>
+    <div class="top">
+      <div class="title">{{album.name}}</div>
+      <div
+        class="back"
+        @click="goAblubms">
+        <div class="icon"></div>
+        Back
+      </div>
+    </div>
     <figure
       class="photo"
       v-for="photo in album.photos"
       :key="photo.id">
       <img :src="photo.url">
-      <span>{{photo.description}}</span>
     </figure>
     <div
       class="button"
@@ -40,6 +47,9 @@ export default {
         window.scroll(0, this.nowLocation)
         window.requestAnimationFrame(this.navigateHandler)
       }
+    },
+    goAblubms () {
+      this.$router.push({ name: 'albums' })
     }
   },
   mounted () {
@@ -60,26 +70,45 @@ export default {
   @include size(100%, auto);
   @include flexCenter;
   flex-direction: column;
-  padding: 0 15%;
+  padding: 0 25%;
   cursor: pointer;
-  > .title {
+  > .top {
     @include size(100%, auto);
-    margin-bottom: 24px;
-    font-size: 32px;
-    font-weight: 900;
+    @include flexCenter;
+    position: relative;
+    margin-bottom: 28px;
     line-height: 40px;
-    text-align: center;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
+    > .title {
+      font-size: 32px;
+      font-weight: 900;
+    }
+    > .back {
+      position: absolute;
+      left: 0;
+      top: 50%;
+      display: flex;
+      font-size: 20px;
+      font-weight: 500;
+      transform: translate(0, -50%);
+      cursor: pointer;
+      &:hover {
+        opacity: .8;
+      }
+      > .icon {
+        @include size(16px);
+        @include backgroundImage('../assets/back-to-top.svg');
+        margin: 12px 12px 0 0;
+        transform: rotate(180deg);
+      }
+    }
   }
   > .photo {
     @include size(100%, auto);
     position: relative;
     &:hover {
       > img {
-        opacity: .5;
-      }
-      > span {
-        opacity: 1;
+        opacity: .6;
       }
     }
     > img {

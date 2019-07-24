@@ -16,7 +16,7 @@ export default new Router({
         },
         {
           path: 'albums',
-          name: 'list',
+          name: 'albums',
           component: () => import('@/container/List')
         },
         {
