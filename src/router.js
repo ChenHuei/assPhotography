@@ -43,16 +43,16 @@ export default new Router({
         {
           path: '',
           name: 'adminList',
-          component: () => import('@/container/AdminList')
+          component: () => import('@/admin/List')
         },
         {
           path: ':id',
           name: 'adminAlbum',
-          component: () => import('@/container/AdminAlbum')
+          component: () => import('@/admin/Album')
         }
       ],
       beforeEnter: (to, from, next) => {
-        if (window.localStorage.getItem('uid').length === 0) {
+        if (window.localStorage.getItem('uid') === null) {
           next('/')
         } else {
           next()
