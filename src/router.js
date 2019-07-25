@@ -25,6 +25,16 @@ export default new Router({
           component: () => import('@/container/Album')
         },
         {
+          path: 'videos',
+          name: 'videos',
+          component: () => import('@/container/Videos')
+        },
+        {
+          path: 'videos/:id',
+          name: 'video',
+          component: () => import('@/container/Video')
+        },
+        {
           path: 'contact',
           name: 'contact',
           component: () => import('@/container/Contact')
