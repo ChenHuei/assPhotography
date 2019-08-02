@@ -68,7 +68,7 @@ export default {
   padding: 16px 10% 0;
   overflow: hidden;
   > .item {
-    @include size(calc(25% - 24px), 280px);
+    @include size(calc(25% - 24px), 20vw);
     margin: 0 24px 48px 0;
     color: color(grey);
     text-decoration: none;
@@ -80,7 +80,7 @@ export default {
       margin: 0 0 48px 0;
     }
     > .cover {
-      @include size(100%, 200px);
+      @include size(100%, 12vw);
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center center;

@@ -46,7 +46,8 @@ export default {
     @include flexCenter;
     position: absolute;
     > img {
-      @include size(90%);
+      @include size(80%);
+      box-shadow: 0 10px 20px color(shadow);
       transition: .5s;
     }
   }

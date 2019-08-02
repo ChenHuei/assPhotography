@@ -13,9 +13,6 @@
           <figure>
             <img :src="item.url">
           </figure>
-          <div class="description">
-            {{item.create}}
-          </div>
         </div>
       </div>
     </div>
@@ -147,9 +144,6 @@ export default {
           > figure {
             opacity: .4;
           }
-          > .description {
-            bottom: 16px;
-          }
         }
         > figure {
           @include size(calc(100% - 16px), auto);
@@ -159,17 +153,6 @@ export default {
             @include size(100%);
             -webkit-filter:grayscale(1)
           }
-        }
-        > .description {
-          @include size(calc(100% - 32px), 56px);
-          position: absolute;
-          bottom: -48px;
-          left: 16px;
-          padding: 16px;
-          color: color(grey);
-          line-height: 24px;
-          box-sizing: border-box;
-          transition: .5s;
         }
       }
     }

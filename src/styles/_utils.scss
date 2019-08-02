@@ -10,7 +10,8 @@ $colors: (
   blue_light: #EFF2F9,
   white: #FFF,
   black: #111,
-  primary: #89a3b2
+  primary: #89a3b2,
+  shadow: rgba(#111, .2)
 );
 
 @function color($color-item) {
