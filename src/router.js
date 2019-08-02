@@ -15,12 +15,12 @@ export default new Router({
           component: () => import('@/container/Home')
         },
         {
-          path: 'albums',
-          name: 'albums',
+          path: 'project',
+          name: 'project',
           component: () => import('@/container/List')
         },
         {
-          path: 'albums/:id',
+          path: 'project/:id',
           name: 'album',
           component: () => import('@/container/Album')
         },

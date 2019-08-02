@@ -43,7 +43,7 @@ export default {
       this.isHover = false
     },
     routerLinkHanlder (id) {
-      return `/albums/${id}`
+      return `/project/${id}`
     }
   },
   mounted () {

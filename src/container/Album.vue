@@ -49,7 +49,7 @@ export default {
       }
     },
     goAblubms () {
-      this.$router.push({ name: 'albums' })
+      this.$router.push({ name: 'project' })
     }
   },
   mounted () {

@@ -31,12 +31,12 @@ export const HOME_ITEMS = [
     path: ['home', 'photo']
   },
   {
-    name: 'Albums',
-    link: '/albums',
-    path: ['albums', 'album']
+    name: 'Project',
+    link: '/project',
+    path: ['project', 'album']
   },
   {
-    name: 'Videos',
+    name: 'Video',
     link: 'videos',
     path: ['videos', 'video']
   },
