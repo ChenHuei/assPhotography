@@ -3,7 +3,7 @@
     <router-link
       class="video"
       v-for="video in VIDEOS_DATA"
-      :key="video.url"
+      :key="video.id"
       :to="routerLinkHandler(video.id)">
       <div
         class="cover"

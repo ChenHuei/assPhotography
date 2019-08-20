@@ -12,7 +12,6 @@
         @mouseleave="leaveHandler">
       </div>
       <div class="name">{{item.name}}</div>
-      <div class="time">{{item.time}}</div>
     </router-link>
   </div>
 </template>
@@ -65,11 +64,11 @@ export default {
   @include flexCenter;
   justify-content: flex-start;
   flex-wrap: wrap;
-  padding: 16px 10% 0;
+  padding: 16px 10vw 0;
   overflow: hidden;
   > .item {
-    @include size(calc(25% - 24px), 20vw);
-    margin: 0 24px 48px 0;
+    @include size(auto, 20vw);
+    margin: 0 calc(((100vw - 84vw) - 40px) / 6) 48px 0;
     color: color(grey);
     text-decoration: none;
     cursor: pointer;
@@ -80,7 +79,7 @@ export default {
       margin: 0 0 48px 0;
     }
     > .cover {
-      @include size(100%, 12vw);
+      @include size(16vw);
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center center;

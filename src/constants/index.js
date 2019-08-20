@@ -91,35 +91,35 @@ export const VIDEOS_DATA = [
   {
     id: 0,
     title: 'LANY - Super Far (Official Video)',
-    url: 'https://www.youtube.com/embed/O78Lpo4ctSE',
+    url: 'https://vimeo.com/341310108',
     time: '2017/09/12',
     cover: 'https://i.ytimg.com/vi/O78Lpo4ctSE/hqdefault.jpg?sqp=-oaymwEZCPYBEIoBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLBhBxJri0W9F2AWMbE3GxDABiRwHg'
   },
   {
     id: 1,
     title: 'LANY - 13 (Official Audio)',
-    url: 'https://www.youtube.com/embed/NDWJWILEA7o',
+    url: 'https://vimeo.com/341310108',
     time: '2017/06/01',
     cover: 'https://i.ytimg.com/vi/NDWJWILEA7o/hqdefault.jpg?sqp=-oaymwEZCPYBEIoBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLBDydB0nMeedTnFZsvA4g_3w2fr5A'
   },
   {
     id: 2,
     title: 'LANY - ILYSB (Stripped)',
-    url: 'https://www.youtube.com/embed/N39Wgo-xrUo',
+    url: 'https://vimeo.com/341310108',
     time: '2016/01/21',
     cover: 'https://i.ytimg.com/vi/RPvhItA3lIM/hqdefault.jpg?sqp=-oaymwEZCPYBEIoBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLDZyHOy5UHFdAsiWaT_L9pvoq0GVA'
   },
   {
     id: 3,
     title: 'ONE OK ROCK - The Beginning',
-    url: 'https://www.youtube.com/embed/Hh9yZWeTmVM',
+    url: 'https://vimeo.com/341310108',
     time: '2012/08/14',
     cover: 'https://i.ytimg.com/vi/Hh9yZWeTmVM/hqdefault.jpg?sqp=-oaymwEZCPYBEIoBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLADpnm9FRxQjhJ9AZGmP5OI7GBKcQ'
   },
   {
     id: 4,
     title: 'ONE OK ROCK - Heartache',
-    url: 'https://www.youtube.com/embed/x9v8aNl6Aps',
+    url: 'https://vimeo.com/341310108',
     time: '2015/02/13',
     cover: 'https://i.ytimg.com/vi/x9v8aNl6Aps/hqdefault.jpg?sqp=-oaymwEZCPYBEIoBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLCpRWTmoTB3wu7OzWlIH22ansCYEA'
   }
