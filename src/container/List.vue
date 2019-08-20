@@ -67,25 +67,25 @@ export default {
   padding: 16px 10vw 0;
   overflow: hidden;
   > .item {
-    @include size(auto, 20vw);
-    margin: 0 calc(((100vw - 84vw) - 40px) / 6) 48px 0;
+    @include size(auto, 26vw);
+    margin: 0 calc(((100vw - 80vw) - 40px - 15px) / 2) 24px 0;
     color: color(grey);
     text-decoration: none;
     cursor: pointer;
     &:hover {
       opacity: .6;
     }
-    &:nth-child(4n + 4) {
-      margin: 0 0 48px 0;
+    &:nth-child(3n + 3) {
+      margin: 0 0 24px 0;
     }
     > .cover {
-      @include size(16vw);
+      @include size(20vw);
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center center;
     }
     > .name {
-      margin: 32px 0 16px 0;
+      margin: 36px 0 0 0;
       font-size: 16px;
       text-align: center;
     }
@@ -99,21 +99,41 @@ export default {
 
 @media screen and (min-width: 660px) and (max-width: 800px) {
   .list {
-    padding: 0 10%;
     > .item {
-      @include size(calc(50% - 12px), 280px);
+      @include size(auto, 40vw);
+      margin: 0 calc(((100vw - 84vw) - 40px - 15px)) 24px 0;
+      &:nth-child(3n + 3) {
+        margin: 0 calc(((100vw - 84vw) - 40px - 15px)) 24px 0;
+      }
       &:nth-child(2n+ 2) {
-        margin: 0 0 48px 0;
+        margin: 0 0 24px 0;
+      }
+      > .cover {
+        @include size(32vw);
+      }
+      > .name {
+        margin: 28px 0 0 0;
       }
     }
   }
 }
 @media screen and (max-width: 659px) {
-  > .list {
-    padding: 0 10%;
+  .list {
     > .item {
-      @include size(100%, 280px);
-      margin: 0 0 48px 0;
+      @include size(auto, 60vw);
+      margin: 0 auto 24px;
+      &:nth-child(3n + 3) {
+        margin: 0 auto 24px;
+      }
+      &:nth-child(2n+ 2) {
+        margin: 0 auto 24px;
+      }
+      > .cover {
+        @include size(50vw);
+      }
+      > .name {
+        margin: 28px 0 0 0;
+      }
     }
   }
 }
