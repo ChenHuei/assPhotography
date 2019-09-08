@@ -1,25 +1,25 @@
 <template>
   <div class="admin">
-    <router-view :key="$route.fullPath"/>
+    <router-view :key="$route.fullPath" />
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Admin',
-  data () {
+  name: "Admin",
+  data() {
     return {
-      uid: ''
-    }
+      uid: ""
+    };
   },
-  mounted () {
-    this.uid = window.localStorage.getItem('uid')
+  mounted() {
+    this.uid = window.localStorage.getItem("uid");
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-@import '../styles/import';
+@import "../styles/import";
 .admin {
   @include size(100%, auto);
   min-height: 100%;

@@ -1,18 +1,19 @@
 <template>
-  <div class="list">
-    <Searchbar :keyword.sync="keyword"/>
+  <div class="projects">
+    <Searchbar :keyword.sync="keyword" />
     <div class="items">
       <router-link
         class="item"
         v-for="item in showAlbums"
         :key="item.name"
-        :to="routerLinkHanlder(item.id)">
+        :to="routerLinkHanlder(item.id)"
+      >
         <div
           class="cover"
           :style="coverStyleHandler(item)"
           @mouseenter="enterHandler(item.id)"
-          @mouseleave="leaveHandler">
-        </div>
+          @mouseleave="leaveHandler"
+        ></div>
         <div class="name">{{item.name}}</div>
         <div class="time">{{item.time}}</div>
       </router-link>
@@ -21,61 +22,71 @@
 </template>
 
 <script>
-import { db } from '../main.js'
-import { Searchbar } from '../components'
+import { db } from "../main.js";
+import { Searchbar } from "../components";
 export default {
-  name: 'AdminList',
-  data () {
+  name: "AdminProjects",
+  data() {
     return {
       isHover: false,
       id: 0,
-      keyword: '',
+      keyword: "",
       albums: []
-    }
+    };
   },
   components: {
     Searchbar
   },
   computed: {
-    showAlbums () {
+    showAlbums() {
       return this.albums.slice().filter(item => {
-        return item.name.toLowerCase().indexOf(this.keyword.toLowerCase()) > -1
-      })
+        return item.name.toLowerCase().indexOf(this.keyword.toLowerCase()) > -1;
+      });
     }
   },
   methods: {
-    coverStyleHandler (item) {
-      const url = this.id === item.id ? this.isHover ? item.hover : item.cover : item.cover
+    coverStyleHandler(item) {
+      const url =
+        this.id === item.id
+          ? this.isHover
+            ? item.hover
+            : item.cover
+          : item.cover;
       return {
-        'backgroundImage': `url(${url})`
-      }
+        backgroundImage: `url(${url})`
+      };
     },
-    enterHandler (id) {
-      this.id = id
-      this.isHover = true
+    enterHandler(id) {
+      this.id = id;
+      this.isHover = true;
     },
-    leaveHandler () {
-      this.isHover = false
+    leaveHandler() {
+      this.isHover = false;
     },
-    routerLinkHanlder (id) {
-      return `/admin/${id}`
+    routerLinkHanlder(id) {
+      return `/admin/${id}`;
     }
   },
-  mounted () {
-    db.collection('albums').get().then(res => {
-      res.docs.forEach(({ id }) => {
-        db.collection('albums').doc(id).get().then(res => {
-          this.albums.push(res.data())
-        })
-      })
-    })
+  mounted() {
+    db.collection("albums")
+      .get()
+      .then(res => {
+        res.docs.forEach(({ id }) => {
+          db.collection("albums")
+            .doc(id)
+            .get()
+            .then(res => {
+              this.albums.push(res.data());
+            });
+        });
+      });
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-@import '../styles/import';
-.list {
+@import "../styles/import";
+.projects {
   @include size(100%, auto);
   min-height: 100%;
   overflow: hidden;
@@ -92,7 +103,7 @@ export default {
       text-decoration: none;
       cursor: pointer;
       &:hover {
-        opacity: .6;
+        opacity: 0.6;
       }
       &:nth-child(4n + 4) {
         margin: 0 0 48px 0;
@@ -111,7 +122,7 @@ export default {
       > .time {
         font-size: 12px;
         text-align: center;
-        opacity: .6;
+        opacity: 0.6;
       }
     }
   }

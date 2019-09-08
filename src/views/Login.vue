@@ -2,82 +2,77 @@
   <div class="login">
     <div class="block">
       <h4 class="title">Hello, 屁哥！</h4>
-      <div
-        class="google"
-        @click="googleLogin">
+      <div class="google" @click="googleLogin">
         <div class="icon"></div>
-        <span>
-          Log in with Google
-        </span>
+        <span>Log in with Google</span>
       </div>
       <div class="hr"></div>
       <div class="form">
-        <input
-          :class="inputClassHandler"
-          type="text"
-          placeholder="Email"
-          v-model.trim="email">
-        <input
-          :class="inputClassHandler"
-          type="password"
-          placeholder="Password"
-          v-model="password">
+        <input :class="inputClassHandler" type="text" placeholder="Email" v-model.trim="email" />
+        <input :class="inputClassHandler" type="password" placeholder="Password" v-model="password" />
       </div>
-      <div
-          v-if="isWarning"
-          class="warning">
-          帳號密碼有誤
-        </div>
-      <div
-        class="login"
-        @click="login">
-        Log In
-      </div>
+      <div v-if="isWarning" class="warning">帳號密碼有誤</div>
+      <div class="login" @click="login">Log In</div>
     </div>
   </div>
 </template>
 
 <script>
-import firebase from 'firebase'
+import firebase from "firebase";
+import { ASS_EMAIL } from "../constants";
 export default {
-  name: 'Login',
-  data () {
+  name: "Login",
+  data() {
     return {
       isWarning: false,
-      email: '',
-      password: ''
-    }
+      email: "",
+      password: "",
+      ASS_EMAIL
+    };
   },
   computed: {
-    inputClassHandler () {
+    inputClassHandler() {
       return {
         warning: this.isWarning
-      }
+      };
     }
   },
   methods: {
-    login () {
-      firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(({ user }) => {
-        window.localStorage.setItem('uid', user.uid)
-        this.$router.replace('admin')
-      }).catch(() => {
-        this.isWarning = true
-      })
+    login() {
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(this.email, this.password)
+        .then(({ user }) => {
+          window.localStorage.setItem("uid", user.uid);
+          this.$router.replace("admin");
+        })
+        .catch(() => {
+          this.isWarning = true;
+        });
     },
-    googleLogin () {
-      const provider = new firebase.auth.GoogleAuthProvider()
-      firebase.auth().signInWithPopup(provider).then(result => {
-        this.$router.replace('admin')
-      }).catch(() => {
-        this.isWarning = true
-      })
+    googleLogin() {
+      const provider = new firebase.auth.GoogleAuthProvider();
+      firebase
+        .auth()
+        .signInWithPopup(provider)
+        .then(result => {
+          const user = result.additionalUserInfo.profile.email;
+          if (user !== this.ASS_EMAIL) {
+            alert("你不是屁哥");
+            return;
+          }
+          this.$router.replace("admin");
+        })
+        .catch(() => {
+          this.isWarning = true;
+        });
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-@import '../styles/import';
+@import "../styles/import";
 .login {
   @include size(100%);
   @include flexCenter;
@@ -105,16 +100,17 @@ export default {
       cursor: pointer;
       > .icon {
         @include size(32px);
-        background: center center url('../assets/google-plus.svg') no-repeat color(red);
+        background: center center url("../assets/google-plus.svg") no-repeat
+          color(red);
         background-size: cover;
         z-index: 1;
       }
       > span {
         margin-right: 20px;
-        letter-spacing: .6px;
+        letter-spacing: 0.6px;
       }
       &::before {
-        content: '';
+        content: "";
         @include size(140px);
         position: absolute;
         left: 0;
@@ -122,7 +118,7 @@ export default {
         background-color: color(red);
         border-radius: 50%;
         transform: translateX(-50%) translateY(-50%);
-        transition: .5s;
+        transition: 0.5s;
         z-index: -1;
       }
       &:hover {
@@ -136,9 +132,11 @@ export default {
       @include size(100%, 20px);
       position: relative;
       margin: 40px 0 32px;
-      background: center center url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAECAYAAACtBE5DAAAAU0lEQVR4AWL8////k3cfvggDOhAHA4CBGIq+2t1/z7OVfCvjCSlzbAv/e7KmnA8b0hnbOAHLsnCfJ7OxgdTGMsaZfVuaT6xSW5dztkAbZ459pV8F6/Yk2x+LrW8AAAAASUVORK5CYII=') repeat-x;
+      background: center center
+        url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAECAYAAACtBE5DAAAAU0lEQVR4AWL8////k3cfvggDOhAHA4CBGIq+2t1/z7OVfCvjCSlzbAv/e7KmnA8b0hnbOAHLsnCfJ7OxgdTGMsaZfVuaT6xSW5dztkAbZ459pV8F6/Yk2x+LrW8AAAAASUVORK5CYII=")
+        repeat-x;
       &::before {
-        content: 'or';
+        content: "or";
         @include size(40px);
         @include flexCenter;
         position: absolute;
@@ -177,7 +175,7 @@ export default {
       color: color(red);
       transform: translateX(-50%) translateY(-50%);
       letter-spacing: 1px;
-      transition: .5s;
+      transition: 0.5s;
     }
     > .login {
       @include size(calc(100% - 40px), auto);
@@ -191,7 +189,7 @@ export default {
       border-radius: 4px;
       cursor: pointer;
       &:hover {
-        opacity: .8;
+        opacity: 0.8;
       }
     }
   }

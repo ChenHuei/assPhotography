@@ -7,17 +7,12 @@
         @click="goAblubms">
         <div class="icon"></div>
         Back
-      </div> -->
+      </div>-->
     </div>
-    <figure
-      class="photo"
-      v-for="photo in project.photos"
-      :key="photo.id">
-      <img :src="photo.url">
+    <figure class="photo" v-for="photo in project.photos" :key="photo.id">
+      <img :src="photo.url" />
     </figure>
-    <div
-      class="button"
-      @click="navigateHandler">
+    <div class="button" @click="navigateHandler">
       <div class="icon"></div>
       <span>back to top</span>
     </div>
@@ -25,47 +20,50 @@
 </template>
 
 <script>
-import { db } from '../main.js'
+import { db } from "../main.js";
 export default {
-  name: 'Project',
-  data () {
+  name: "Project",
+  data() {
     return {
       nowLocation: 0,
       project: {}
-    }
+    };
   },
   methods: {
-    onScroll () {
-      this.nowLocation = window.pageYOffset
+    onScroll() {
+      this.nowLocation = window.pageYOffset;
     },
-    navigateHandler () {
-      const diff = Math.floor(this.nowLocation * 0.1)
+    navigateHandler() {
+      const diff = Math.floor(this.nowLocation * 0.1);
       if (diff === 0) {
-        window.scroll(0, diff)
+        window.scroll(0, diff);
       } else {
-        this.nowLocation -= diff
-        window.scroll(0, this.nowLocation)
-        window.requestAnimationFrame(this.navigateHandler)
+        this.nowLocation -= diff;
+        window.scroll(0, this.nowLocation);
+        window.requestAnimationFrame(this.navigateHandler);
       }
     },
-    goAblubms () {
-      this.$router.push({ name: 'project' })
+    goAblubms() {
+      this.$router.push({ name: "project" });
     }
   },
-  mounted () {
-    db.collection('albums').doc(this.$route.params.id).get().then(res => {
-      this.project = res.data()
-    })
-    window.addEventListener('scroll', this.onScroll)
+  mounted() {
+    db.collection("albums")
+      .doc(this.$route.params.id)
+      .get()
+      .then(res => {
+        this.project = res.data();
+      });
+    window.addEventListener("scroll", this.onScroll);
   },
-  beforeDestroy () {
-    window.removeEventListener('scroll', this.onScroll)
+  beforeDestroy() {
+    window.removeEventListener("scroll", this.onScroll);
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-@import '../styles/import';
+@import "../styles/import";
 .project {
   @include size(100%, auto);
   @include flexCenter;
@@ -93,11 +91,11 @@ export default {
       transform: translate(0, -50%);
       cursor: pointer;
       &:hover {
-        opacity: .8;
+        opacity: 0.8;
       }
       > .icon {
         @include size(16px);
-        @include backgroundImage('../assets/back-to-top.svg');
+        @include backgroundImage("../assets/back-to-top.svg");
         margin: 12px 12px 0 0;
         transform: rotate(180deg);
       }
@@ -108,12 +106,12 @@ export default {
     position: relative;
     &:hover {
       > img {
-        opacity: .6;
+        opacity: 0.6;
       }
     }
     > img {
       @include size(100%);
-      transition: .5s;
+      transition: 0.5s;
     }
     > span {
       position: absolute;
@@ -124,20 +122,20 @@ export default {
       font-size: 20px;
       letter-spacing: 1px;
       opacity: 0;
-      transition: .5s;
+      transition: 0.5s;
     }
   }
   > .button {
     @include size(calc(100% + 40%), 80px);
     @include flexCenter;
-    transition: .5s;
+    transition: 0.5s;
     cursor: pointer;
     &:hover {
-      opacity: .6;
+      opacity: 0.6;
     }
     > .icon {
       @include size(40px);
-      @include backgroundImage('../assets/back-to-top.svg');
+      @include backgroundImage("../assets/back-to-top.svg");
       transform: rotate(-90deg);
     }
     > span {

@@ -4,11 +4,9 @@
       class="video"
       v-for="video in VIDEOS_DATA"
       :key="video.id"
-      :to="routerLinkHandler(video.id)">
-      <div
-        class="cover"
-        :style="coverStyleHandler(video)">
-      </div>
+      :to="routerLinkHandler(video.id)"
+    >
+      <div class="cover" :style="coverStyleHandler(video)"></div>
       <div class="name">{{video.title}}</div>
       <div class="time">{{video.time}}</div>
     </router-link>
@@ -16,29 +14,29 @@
 </template>
 
 <script>
-import { VIDEOS_DATA } from '../constants'
+import { VIDEOS_DATA } from "../constants";
 export default {
-  name: 'Videos',
-  data () {
+  name: "Videos",
+  data() {
     return {
       VIDEOS_DATA
-    }
+    };
   },
   methods: {
-    routerLinkHandler (id) {
-      return `/videos/${id}`
+    routerLinkHandler(id) {
+      return `/videos/${id}`;
     },
-    coverStyleHandler (item) {
+    coverStyleHandler(item) {
       return {
-        'backgroundImage': `url(${item.cover})`
-      }
+        backgroundImage: `url(${item.cover})`
+      };
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-@import '../styles/import';
+@import "../styles/import";
 
 .videos {
   @include size(100%, auto);
@@ -54,7 +52,7 @@ export default {
     text-decoration: none;
     cursor: pointer;
     &:hover {
-      opacity: .6;
+      opacity: 0.6;
     }
     &:nth-child(4n + 4) {
       margin: 0 0 48px 0;
@@ -76,7 +74,7 @@ export default {
       font-size: 12px;
       line-height: 16px;
       text-align: center;
-      opacity: .6;
+      opacity: 0.6;
     }
   }
 }

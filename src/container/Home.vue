@@ -1,36 +1,31 @@
 <template>
   <div class="home">
     <div class="photos">
-      <div
-        class="row"
-        v-for="row in rowNumber"
-        :key="row"
-        :style="rowStyleHandler">
-        <div class="photo"
+      <div class="row" v-for="row in rowNumber" :key="row" :style="rowStyleHandler">
+        <div
+          class="photo"
           v-for="item in rowData(row)"
           :key="item.url"
-          @click="openSinglePhoto(item)">
+          @click="openSinglePhoto(item)"
+        >
           <figure>
-            <img :src="item.url">
+            <img :src="item.url" />
           </figure>
         </div>
       </div>
     </div>
     <div :class="loadingClassHandler"></div>
-    <SinglePhoto
-      v-if="isOpenSinglePhoto"
-      :photo="photo"
-      @back="clearPhoto"/>
+    <SinglePhoto v-if="isOpenSinglePhoto" :photo="photo" @back="clearPhoto" />
   </div>
 </template>
 
 <script>
-import { SinglePhoto } from '../components'
-import { SCREEN_SIZES, PAGE_SIZE } from '../constants'
-import { db } from '../main.js'
+import { SinglePhoto } from "../components";
+import { SCREEN_SIZES, PAGE_SIZE } from "../constants";
+import { db } from "../main.js";
 export default {
-  name: 'Home',
-  data () {
+  name: "Home",
+  data() {
     return {
       isLoading: true,
       isShow: true,
@@ -41,87 +36,99 @@ export default {
       list: [],
       SCREEN_SIZES,
       PAGE_SIZE
-    }
+    };
   },
   components: {
     SinglePhoto
   },
   computed: {
-    rowStyleHandler () {
+    rowStyleHandler() {
       return {
         width: `${100 / this.rowNumber}%`
-      }
+      };
     },
-    loadingClassHandler () {
+    loadingClassHandler() {
       return {
         loading: true,
         show: this.isLoading
-      }
+      };
     },
-    startIndex () {
-      return (this.count - 1) * this.PAGE_SIZE
+    startIndex() {
+      return (this.count - 1) * this.PAGE_SIZE;
     },
-    endIndex () {
-      return this.count * this.PAGE_SIZE
+    endIndex() {
+      return this.count * this.PAGE_SIZE;
     },
-    isOpenSinglePhoto () {
-      return Object.keys(this.photo).length > 0
+    isOpenSinglePhoto() {
+      return Object.keys(this.photo).length > 0;
     }
   },
   methods: {
-    onResize () {
-      this.screenWidth = document.body.clientWidth
+    onResize() {
+      this.screenWidth = document.body.clientWidth;
       this.rowNumber = this.SCREEN_SIZES.reduce((acc, item, index) => {
-        if (this.screenWidth > item) acc += 1
-        return acc
-      }, 1)
+        if (this.screenWidth > item) acc += 1;
+        return acc;
+      }, 1);
     },
-    onScroll () {
-      if (this.isLoading) return false
-      if (window.pageYOffset + window.innerHeight > document.body.scrollHeight - window.innerHeight / 2) {
-        this.isLoading = true
-        this.fetchPhotos()
+    onScroll() {
+      if (this.isLoading) return false;
+      if (
+        window.pageYOffset + window.innerHeight >
+        document.body.scrollHeight - window.innerHeight / 2
+      ) {
+        this.isLoading = true;
+        this.fetchPhotos();
       }
     },
-    rowData (idx) {
-      return this.list.filter((item, index) => index % this.rowNumber === idx - 1)
+    rowData(idx) {
+      return this.list.filter(
+        (item, index) => index % this.rowNumber === idx - 1
+      );
     },
-    routerLinkHanlder (id) {
-      return `/photo/${id}`
+    routerLinkHanlder(id) {
+      return `/photo/${id}`;
     },
-    fetchPhotos () {
-      this.count++
-      db.collection('photos').orderBy('create', 'desc').limit(this.endIndex).get().then(res => {
-        res.docs.slice(this.startIndex, this.endIndex).forEach(({ id }) => {
-          db.collection('photos').doc(id).get().then(res => {
-            this.list.push(res.data())
-          })
-        })
-        this.isLoading = false
-      })
+    fetchPhotos() {
+      this.count++;
+      db.collection("photos")
+        .orderBy("create", "desc")
+        .limit(this.endIndex)
+        .get()
+        .then(res => {
+          res.docs.slice(this.startIndex, this.endIndex).forEach(({ id }) => {
+            db.collection("photos")
+              .doc(id)
+              .get()
+              .then(res => {
+                this.list.push(res.data());
+              });
+          });
+          this.isLoading = false;
+        });
     },
-    openSinglePhoto (photo) {
-      this.photo = photo
+    openSinglePhoto(photo) {
+      this.photo = photo;
     },
-    clearPhoto () {
-      this.photo = {}
+    clearPhoto() {
+      this.photo = {};
     }
   },
-  mounted () {
-    window.addEventListener('resize', this.onResize)
-    window.addEventListener('scroll', this.onScroll)
-    this.fetchPhotos()
-    this.onResize()
+  mounted() {
+    window.addEventListener("resize", this.onResize);
+    window.addEventListener("scroll", this.onScroll);
+    this.fetchPhotos();
+    this.onResize();
   },
-  beforeDestroy () {
-    window.removeEventListener('resize', this.onResize)
-    window.removeEventListener('scroll', this.onScroll)
+  beforeDestroy() {
+    window.removeEventListener("resize", this.onResize);
+    window.removeEventListener("scroll", this.onScroll);
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-@import '../styles/import';
+@import "../styles/import";
 .home {
   @include size(100%, auto);
   position: relative;
@@ -137,12 +144,12 @@ export default {
       > .photo {
         @include size(100%, auto);
         position: relative;
-        transition: .5s;
+        transition: 0.5s;
         overflow: hidden;
         cursor: pointer;
         &:hover {
           > figure {
-            opacity: .4;
+            opacity: 0.4;
           }
         }
         > figure {
@@ -151,7 +158,7 @@ export default {
           font-size: 0;
           > img {
             @include size(100%);
-            -webkit-filter:grayscale(1)
+            -webkit-filter: grayscale(1);
           }
         }
       }
@@ -163,11 +170,11 @@ export default {
     position: absolute;
     left: 10px;
     bottom: -90px;
-    background: center center url('../assets/loading.svg') no-repeat;
+    background: center center url("../assets/loading.svg") no-repeat;
     background-size: contain;
     opacity: 0;
     transform: translateY(-50%);
-    transition: .5s;
+    transition: 0.5s;
     &.show {
       opacity: 1;
     }

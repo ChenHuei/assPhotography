@@ -1,34 +1,26 @@
 <template>
-  <div class="album">
-    <Searchbar :isHide="true"/>
+  <div class="project">
+    <Searchbar :isHide="true" />
     <div class="container">
       <div class="navbar">
-        <div
-          class="button back"
-          @click="back">
-          返回
-        </div>
-        <div
-          class="button edit"
-          @click="edit">
-          {{editTitleHandler}}
-        </div>
+        <div class="button back" @click="back">返回</div>
+        <div class="button edit" @click="edit">{{editTitleHandler}}</div>
       </div>
       <div class="information">
         <div :class="itemClassHandler">
           <span>相簿名稱</span>
-          <input type="text" v-model="album.name">
+          <input type="text" v-model="project.name" />
         </div>
         <div :class="itemClassHandler">
           <span>相簿封面(主)</span>
           <figure>
-            <img :src="album.cover">
+            <img :src="project.cover" />
           </figure>
         </div>
         <div :class="itemClassHandler">
           <span>相簿封面(副)</span>
           <figure>
-            <img :src="album.hover">
+            <img :src="project.hover" />
           </figure>
         </div>
       </div>
@@ -37,53 +29,56 @@
 </template>
 
 <script>
-import { db } from '../main.js'
-import { Searchbar } from '../components'
+import { db } from "../main.js";
+import { Searchbar } from "../components";
 export default {
-  name: 'AdminAlbum',
-  data () {
+  name: "AdminProject",
+  data() {
     return {
       isEdit: false,
-      keyword: '',
-      album: {}
-    }
+      keyword: "",
+      project: {}
+    };
   },
   components: {
     Searchbar
   },
   computed: {
-    editTitleHandler () {
-      return this.isEdit ? '完成' : '編輯'
+    editTitleHandler() {
+      return this.isEdit ? "完成" : "編輯";
     },
-    itemClassHandler () {
+    itemClassHandler() {
       return {
         item: true,
         edit: this.isEdit
-      }
+      };
     }
   },
   methods: {
-    changeKeyword (e) {
-      this.keyword = e
+    changeKeyword(e) {
+      this.keyword = e;
     },
-    back () {
-      this.$router.go(-1)
+    back() {
+      this.$router.go(-1);
     },
-    edit () {
-      this.isEdit = !this.isEdit
+    edit() {
+      this.isEdit = !this.isEdit;
     }
   },
-  mounted () {
-    db.collection('albums').doc(this.$route.params.id).get().then(res => {
-      this.album = res.data()
-    })
+  mounted() {
+    db.collection("albums")
+      .doc(this.$route.params.id)
+      .get()
+      .then(res => {
+        this.project = res.data();
+      });
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-@import '../styles/import';
-.album {
+@import "../styles/import";
+.project {
   @include size(100%, auto);
   > .container {
     @include size(100%, auto);
@@ -98,7 +93,7 @@ export default {
         @include flexCenter;
         border: 1px solid color(primary);
         border-radius: 8px;
-        transition: .5s;
+        transition: 0.5s;
         cursor: pointer;
         &:hover {
           color: color(white);

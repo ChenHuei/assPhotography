@@ -1,7 +1,8 @@
-import Vue from 'vue'
-import Router from 'vue-router'
+import Vue from 'vue';
+import Router from 'vue-router';
+import { FIREBASE_UID } from './constants';
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
   routes: [
@@ -52,20 +53,20 @@ export default new Router({
       children: [
         {
           path: '',
-          name: 'adminList',
-          component: () => import('@/admin/List')
+          name: 'adminProjects',
+          component: () => import('@/admin/Projects')
         },
         {
           path: ':id',
-          name: 'adminAlbum',
-          component: () => import('@/admin/Album')
+          name: 'adminProject',
+          component: () => import('@/admin/Project')
         }
       ],
       beforeEnter: (to, from, next) => {
-        if (window.localStorage.getItem('uid') === null) {
-          next('/')
+        if (FIREBASE_UID.includes(window.localStorage.getItem('uid'))) {
+          next();
         } else {
-          next()
+          next('/');
         }
       }
     },
@@ -74,4 +75,4 @@ export default new Router({
       redirect: '/'
     }
   ]
-})
+});

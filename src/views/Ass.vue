@@ -1,32 +1,32 @@
 <template>
   <div class="ass">
-    <Topbar :active="active"/>
+    <Topbar :active="active" />
     <div class="container">
-      <router-view :key="$route.fullPath"/>
+      <router-view :key="$route.fullPath" />
     </div>
   </div>
 </template>
 
 <script>
-import { Topbar } from '../components'
+import { Topbar } from "../components";
 export default {
-  name: 'ass',
-  data () {
+  name: "ass",
+  data() {
     return {
-      active: ''
-    }
+      active: ""
+    };
   },
   components: {
     Topbar
   },
-  mounted () {
-    this.active = this.$route.name
+  mounted() {
+    this.active = this.$route.name;
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-@import '../styles/import';
+@import "../styles/import";
 .ass {
   @include size(100%, auto);
   min-height: 100%;
