@@ -35,11 +35,11 @@ export const HOME_ITEMS = [
     link: '/project',
     path: ['project', 'album']
   },
-  {
-    name: 'Video',
-    link: 'videos',
-    path: ['videos', 'video']
-  },
+  // {
+  //   name: 'Video',
+  //   link: 'videos',
+  //   path: ['videos', 'video']
+  // },
   {
     name: 'Contact',
     link: '/contact',

@@ -17,23 +17,23 @@ export default new Router({
         {
           path: 'project',
           name: 'project',
-          component: () => import('@/container/List')
+          component: () => import('@/container/Projects')
         },
         {
           path: 'project/:id',
           name: 'album',
-          component: () => import('@/container/Album')
+          component: () => import('@/container/Project')
         },
-        {
-          path: 'videos',
-          name: 'videos',
-          component: () => import('@/container/Videos')
-        },
-        {
-          path: 'videos/:id',
-          name: 'video',
-          component: () => import('@/container/Video')
-        },
+        // {
+        //   path: 'videos',
+        //   name: 'videos',
+        //   component: () => import('@/container/Videos')
+        // },
+        // {
+        //   path: 'videos/:id',
+        //   name: 'video',
+        //   component: () => import('@/container/Video')
+        // },
         {
           path: 'contact',
           name: 'contact',

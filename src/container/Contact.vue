@@ -2,9 +2,7 @@
   <div class="contact">
     <div class="author">
       <div class="left">
-        <div
-          class="cover"
-          :style="coverStyleHandler"></div>
+        <div class="cover" :style="coverStyleHandler"></div>
       </div>
       <div class="right">
         <div class="name">{{AUTHOR.name}}</div>
@@ -15,20 +13,14 @@
             v-for="link in AUTHOR.links"
             :key="link.name"
             :href="link.url"
-            :target="targetHandler(link.tag)">
-            <font-awesome-icon
-              :icon="iconHandler(link)"
-              :class="iconClassHandler(link.tag)"/>
+            :target="targetHandler(link.tag)"
+          >
+            <font-awesome-icon :icon="iconHandler(link)" :class="iconClassHandler(link.tag)" />
             <span>{{link.name}}</span>
           </a>
         </div>
         <div class="description">
-          <div
-            class="row"
-            v-for="row in AUTHOR.description"
-            :key="row">
-            {{row}}
-          </div>
+          <div class="row" v-for="row in AUTHOR.description" :key="row">{{row}}</div>
         </div>
       </div>
     </div>
@@ -36,39 +28,39 @@
 </template>
 
 <script>
-import { AUTHOR } from '../constants'
+import { AUTHOR } from "../constants";
 export default {
-  name: 'Contact',
-  data () {
+  name: "Contact",
+  data() {
     return {
       AUTHOR
-    }
+    };
   },
   computed: {
-    coverStyleHandler () {
+    coverStyleHandler() {
       return {
-        'background': `center center url(${this.AUTHOR.cover}) no-repeat`,
-        'backgroundSize': 'cover'
-      }
+        background: `center center url(${this.AUTHOR.cover}) no-repeat`,
+        backgroundSize: "cover"
+      };
     }
   },
   methods: {
-    iconHandler (link) {
-      return link.isBrand ? { prefix: 'fab', iconName: link.tag } : link.tag
+    iconHandler(link) {
+      return link.isBrand ? { prefix: "fab", iconName: link.tag } : link.tag;
     },
-    iconClassHandler (tag) {
-      const center = tag === 'mobile-alt' || tag === 'facebook-f'
-      return { center }
+    iconClassHandler(tag) {
+      const center = tag === "mobile-alt" || tag === "facebook-f";
+      return { center };
     },
-    targetHandler (tag) {
-      return tag === 'envelope' ? '' : '_blank'
+    targetHandler(tag) {
+      return tag === "envelope" ? "" : "_blank";
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-@import '../styles/import';
+@import "../styles/import";
 .contact {
   @include size(100%);
   @include flexCenter;
@@ -79,7 +71,8 @@ export default {
     @include flexCenter;
     justify-content: space-between;
     max-width: 960px;
-    > .left, > .right {
+    > .left,
+    > .right {
       @include size(50%, 420px);
       padding: 24px;
     }
@@ -96,7 +89,7 @@ export default {
       > .englishName {
         margin: 8px 0;
         font-size: 16px;
-        opacity: .6;
+        opacity: 0.6;
       }
       > .links {
         @include flexCenter;
@@ -149,7 +142,8 @@ export default {
     margin: 0;
     > .author {
       flex-direction: column;
-      > .left, > .right {
+      > .left,
+      > .right {
         @include size(100%, 420px);
       }
       > .left {
@@ -166,7 +160,8 @@ export default {
     padding: 0;
     > .author {
       flex-direction: column;
-      > .left, > .right {
+      > .left,
+      > .right {
         @include size(100%, 420px);
       }
       > .left {

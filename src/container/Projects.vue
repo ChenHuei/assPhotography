@@ -1,65 +1,76 @@
 <template>
-  <div class="list">
+  <div class="projects">
     <router-link
       class="item"
       v-for="item in albums"
       :key="item.name"
-      :to="routerLinkHanlder(item.id)">
+      :to="routerLinkHanlder(item.id)"
+    >
       <div
         class="cover"
         :style="coverStyleHandler(item)"
         @mouseenter="enterHandler(item.id)"
-        @mouseleave="leaveHandler">
-      </div>
+        @mouseleave="leaveHandler"
+      ></div>
       <div class="name">{{item.name}}</div>
     </router-link>
   </div>
 </template>
 
 <script>
-import { db } from '../main.js'
+import { db } from "../main.js";
 export default {
-  name: 'List',
-  data () {
+  name: "Projects",
+  data() {
     return {
       isHover: false,
       id: 0,
       albums: []
-    }
+    };
   },
   methods: {
-    coverStyleHandler (item) {
-      const url = this.id === item.id ? this.isHover ? item.hover : item.cover : item.cover
+    coverStyleHandler(item) {
+      const url =
+        this.id === item.id
+          ? this.isHover
+            ? item.hover
+            : item.cover
+          : item.cover;
       return {
-        'backgroundImage': `url(${url})`
-      }
+        backgroundImage: `url(${url})`
+      };
     },
-    enterHandler (id) {
-      this.id = id
-      this.isHover = true
+    enterHandler(id) {
+      this.id = id;
+      this.isHover = true;
     },
-    leaveHandler () {
-      this.isHover = false
+    leaveHandler() {
+      this.isHover = false;
     },
-    routerLinkHanlder (id) {
-      return `/project/${id}`
+    routerLinkHanlder(id) {
+      return `/project/${id}`;
     }
   },
-  mounted () {
-    db.collection('albums').get().then(res => {
-      res.docs.forEach(({ id }) => {
-        db.collection('albums').doc(id).get().then(res => {
-          this.albums.push(res.data())
-        })
-      })
-    })
+  mounted() {
+    db.collection("albums")
+      .get()
+      .then(res => {
+        res.docs.forEach(({ id }) => {
+          db.collection("albums")
+            .doc(id)
+            .get()
+            .then(res => {
+              this.albums.push(res.data());
+            });
+        });
+      });
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-@import '../styles/import';
-.list {
+@import "../styles/import";
+.projects {
   @include size(100%, auto);
   @include flexCenter;
   justify-content: flex-start;
@@ -73,7 +84,7 @@ export default {
     text-decoration: none;
     cursor: pointer;
     &:hover {
-      opacity: .6;
+      opacity: 0.6;
     }
     &:nth-child(3n + 3) {
       margin: 0 0 24px 0;
@@ -92,20 +103,20 @@ export default {
     > .time {
       font-size: 12px;
       text-align: center;
-      opacity: .6;
+      opacity: 0.6;
     }
   }
 }
 
 @media screen and (min-width: 660px) and (max-width: 800px) {
-  .list {
+  .projects {
     > .item {
       @include size(auto, 40vw);
       margin: 0 calc(((100vw - 84vw) - 40px - 15px)) 24px 0;
       &:nth-child(3n + 3) {
         margin: 0 calc(((100vw - 84vw) - 40px - 15px)) 24px 0;
       }
-      &:nth-child(2n+ 2) {
+      &:nth-child(2n + 2) {
         margin: 0 0 24px 0;
       }
       > .cover {
@@ -118,14 +129,14 @@ export default {
   }
 }
 @media screen and (max-width: 659px) {
-  .list {
+  .projects {
     > .item {
       @include size(auto, 60vw);
       margin: 0 auto 24px;
       &:nth-child(3n + 3) {
         margin: 0 auto 24px;
       }
-      &:nth-child(2n+ 2) {
+      &:nth-child(2n + 2) {
         margin: 0 auto 24px;
       }
       > .cover {

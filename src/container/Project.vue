@@ -1,17 +1,17 @@
 <template>
-  <div class="album">
+  <div class="project">
     <div class="top">
-      <div class="title">{{album.name}}</div>
-      <div
+      <div class="title">{{project.name}}</div>
+      <!-- <div
         class="back"
         @click="goAblubms">
         <div class="icon"></div>
         Back
-      </div>
+      </div> -->
     </div>
     <figure
       class="photo"
-      v-for="photo in album.photos"
+      v-for="photo in project.photos"
       :key="photo.id">
       <img :src="photo.url">
     </figure>
@@ -27,11 +27,11 @@
 <script>
 import { db } from '../main.js'
 export default {
-  name: 'Album',
+  name: 'Project',
   data () {
     return {
       nowLocation: 0,
-      album: {}
+      project: {}
     }
   },
   methods: {
@@ -54,7 +54,7 @@ export default {
   },
   mounted () {
     db.collection('albums').doc(this.$route.params.id).get().then(res => {
-      this.album = res.data()
+      this.project = res.data()
     })
     window.addEventListener('scroll', this.onScroll)
   },
@@ -66,7 +66,7 @@ export default {
 
 <style lang="scss" scoped>
 @import '../styles/import';
-.album {
+.project {
   @include size(100%, auto);
   @include flexCenter;
   flex-direction: column;
