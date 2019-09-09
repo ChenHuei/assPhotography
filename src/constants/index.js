@@ -30,6 +30,17 @@ export const HOME_ICONS = [
   }
 ];
 
+export const ADMIN_ITEMS = [
+  {
+    name: 'Projects',
+    link: '/admin/projects'
+  },
+  {
+    name: 'Videos',
+    link: '/admin/videos'
+  }
+];
+
 export const HOME_ITEMS = [
   {
     name: 'Home',

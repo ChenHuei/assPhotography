@@ -1,17 +1,8 @@
 <template>
   <nav class="topbar">
-    <div
-      class="title"
-      @click="goHome">
-      ASS PHOTOGRAPHY
-    </div>
+    <div class="title" @click="goHome">ASS PHOTOGRAPHY</div>
     <div class="icons">
-      <a
-        class="icon"
-        v-for="icon in HOME_ICONS"
-        :key="icon.name"
-        :href="icon.link"
-        target="_blank">
+      <a class="icon" v-for="icon in HOME_ICONS" :key="icon.name" :href="icon.link" target="_blank">
         <font-awesome-icon :icon="iconHandler(icon.name)"></font-awesome-icon>
       </a>
     </div>
@@ -20,51 +11,50 @@
         v-for="item in HOME_ITEMS"
         :key="item.name"
         :to="item.link"
-        :class="itemClassHandler(item.path)">
-        {{item.name}}
-      </router-link>
+        :class="itemClassHandler(item.path)"
+      >{{item.name}}</router-link>
     </div>
   </nav>
 </template>
 
 <script>
-import { HOME_ICONS, HOME_ITEMS } from '../../constants'
+import { HOME_ICONS, HOME_ITEMS } from "../../constants";
 export default {
-  name: 'topbar',
+  name: "topbar",
   props: {
     active: {
       type: String,
       required: true
     }
   },
-  data () {
+  data() {
     return {
       HOME_ICONS,
       HOME_ITEMS
-    }
+    };
   },
   methods: {
-    iconHandler (name) {
+    iconHandler(name) {
       return {
-        prefix: 'fab',
+        prefix: "fab",
         iconName: name
-      }
+      };
     },
-    itemClassHandler (path) {
+    itemClassHandler(path) {
       return {
         item: true,
         active: path.some(item => item === this.active)
-      }
+      };
     },
-    goHome () {
-      this.$router.push({ name: 'home' })
+    goHome() {
+      this.$router.push({ name: "home" });
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-@import '../../styles/import';
+@import "../../styles/import";
 .topbar {
   @include size(100%, 240px);
   @include flexCenter;
@@ -86,7 +76,7 @@ export default {
       margin-right: 24px;
       font-size: 24px;
       color: color(blue);
-      transition: .5s;
+      transition: 0.5s;
       text-decoration: none;
       cursor: pointer;
       &:hover {
@@ -105,14 +95,14 @@ export default {
       margin-right: 24px;
       font-size: 16px;
       color: color(grey);
-      transition: .5s;
+      transition: 0.5s;
       text-decoration: none;
       cursor: pointer;
       &.active {
         color: color(blue);
       }
       &:hover {
-        opacity: .6;
+        opacity: 0.6;
       }
       &:last-child {
         margin-right: 0;

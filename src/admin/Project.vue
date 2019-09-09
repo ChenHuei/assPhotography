@@ -1,6 +1,5 @@
 <template>
   <div class="project">
-    <Searchbar :isHide="true" />
     <div class="container">
       <div class="navbar">
         <div class="button back" @click="back">返回</div>
@@ -30,7 +29,6 @@
 
 <script>
 import { db } from "../main.js";
-import { Searchbar } from "../components";
 export default {
   name: "AdminProject",
   data() {
@@ -39,9 +37,6 @@ export default {
       keyword: "",
       project: {}
     };
-  },
-  components: {
-    Searchbar
   },
   computed: {
     editTitleHandler() {

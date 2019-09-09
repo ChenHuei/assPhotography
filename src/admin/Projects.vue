@@ -1,6 +1,5 @@
 <template>
   <div class="projects">
-    <Searchbar :keyword.sync="keyword" />
     <div class="items">
       <router-link
         class="item"
@@ -23,7 +22,6 @@
 
 <script>
 import { db } from "../main.js";
-import { Searchbar } from "../components";
 export default {
   name: "AdminProjects",
   data() {
@@ -33,9 +31,6 @@ export default {
       keyword: "",
       albums: []
     };
-  },
-  components: {
-    Searchbar
   },
   computed: {
     showAlbums() {
@@ -64,7 +59,7 @@ export default {
       this.isHover = false;
     },
     routerLinkHanlder(id) {
-      return `/admin/${id}`;
+      return `/admin/projects/${id}`;
     }
   },
   mounted() {

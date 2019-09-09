@@ -44,7 +44,7 @@ export default {
         .signInWithEmailAndPassword(this.email, this.password)
         .then(({ user }) => {
           window.localStorage.setItem("uid", user.uid);
-          this.$router.replace("admin");
+          this.$router.push({ name: "adminProjects" });
         })
         .catch(() => {
           this.isWarning = true;

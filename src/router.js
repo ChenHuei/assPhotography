@@ -52,14 +52,24 @@ export default new Router({
       component: () => import('@/views/Admin'),
       children: [
         {
-          path: '',
+          path: 'projects',
           name: 'adminProjects',
           component: () => import('@/admin/Projects')
         },
         {
-          path: ':id',
+          path: 'projects/:id',
           name: 'adminProject',
           component: () => import('@/admin/Project')
+        },
+        {
+          path: 'videos',
+          name: 'adminVideos',
+          component: () => import('@/admin/Videos')
+        },
+        {
+          path: 'videos/:id',
+          name: 'adminVideo',
+          component: () => import('@/admin/Video')
         }
       ],
       beforeEnter: (to, from, next) => {

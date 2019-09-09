@@ -1,82 +1,108 @@
 <template>
   <div class="searchBar">
-    <div class="path">
-      {{adminPathHandler}}
+    <div class="links">
+      <router-link
+        v-for="item in ADMIN_ITEMS"
+        :key="item.name"
+        :to="item.link"
+        :class="itemClassHandler(item.link)"
+      >{{item.name}}</router-link>
     </div>
     <label :class="searchClassHandler">
       <div class="placeholder">
-        <font-awesome-icon icon="search"/>
+        <font-awesome-icon icon="search" />
         <span>Search</span>
       </div>
-      <input
-        type="text"
-        v-model.trim="keywordHandler"
-        @blur="reset"
-        @focus="toggle">
+      <input type="text" v-model.trim="keywordHandler" @blur="reset" @focus="toggle" />
     </label>
   </div>
 </template>
 
 <script>
+import { ADMIN_ITEMS } from "../../constants";
 export default {
-  name: 'SearcbBar',
+  name: "SearcbBar",
   props: {
     keyword: {
       type: String
     },
     isHide: {
-      type: Boolean
+      type: Boolean,
+      default: false
     }
   },
-  data () {
+  data() {
     return {
-      isFocus: false
-    }
+      isFocus: false,
+      ADMIN_ITEMS
+    };
   },
   computed: {
     keywordHandler: {
-      get () {
-        return this.keyword
+      get() {
+        return this.keyword;
       },
-      set (val) {
-        this.$emit('update:keyword', val)
+      set(val) {
+        this.$emit("update:keyword", val);
       }
     },
-    searchClassHandler () {
+    searchClassHandler() {
       return {
         search: true,
-        focus: this.isFocus || this.keyword !== '',
+        focus: this.isFocus || this.keyword !== "",
         hide: this.isHide
-      }
-    },
-    adminPathHandler () {
-      return this.$route.fullPath
+      };
     }
   },
   methods: {
-    reset () {
-      this.isFocus = false
+    reset() {
+      this.isFocus = false;
     },
-    toggle () {
-      this.isFocus = !this.isFocus
+    toggle() {
+      this.isFocus = !this.isFocus;
+    },
+    itemClassHandler(path) {
+      return {
+        item: true,
+        active: this.$route.fullPath.indexOf(path) > -1
+      };
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-@import '../../styles/import';
+@import "../../styles/import";
 .searchBar {
   @include size(100%, 80px);
   @include flexCenter;
   justify-content: space-between;
   padding: 12px 60px;
   background-color: color(grey);
-  > .path {
-    @include size(auto);
+  > .links {
+    @include size(100%);
+    @include flexCenter;
+    justify-content: flex-start;
     font-size: 20px;
     font-weight: 700;
     letter-spacing: 1px;
+    > .item {
+      padding: 8px 16px;
+      margin-right: 12x;
+      color: color(black);
+      transition: 0.5s;
+      text-decoration: none;
+      cursor: pointer;
+      &.active {
+        color: color(blue);
+      }
+      &:hover {
+        opacity: 0.6;
+      }
+      &:last-child {
+        margin-right: 0;
+      }
+    }
   }
   > .search {
     @include size(320px, 40px);
@@ -110,7 +136,7 @@ export default {
       outline: none;
       &:focus {
         border: 1px solid color(blue);
-        transition: .5s;
+        transition: 0.5s;
       }
     }
   }
