@@ -41,6 +41,17 @@ export const ADMIN_ITEMS = [
   // }
 ];
 
+export const ADMIN_PROJECT_INFO = [
+  {
+    name: '相簿封面(主)',
+    value: 'cover'
+  },
+  {
+    name: '相簿封面(副)',
+    value: 'hover'
+  }
+];
+
 export const HOME_ITEMS = [
   {
     name: 'Home',

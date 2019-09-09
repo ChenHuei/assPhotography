@@ -12,24 +12,26 @@
         <span>上傳圖片</span>
       </div>
     </label>
-    <img v-if="url" class="preview" :src="url" />
+    <img class="preview" :src="url" />
   </div>
 </template>
 
 <script>
 export default {
   name: "Upload",
-  data() {
-    return {
-      url: ""
-    };
+  props: {
+    url: {
+      type: String,
+      required: true,
+      default: ''
+    }
   },
   methods: {
     fileHandler(evt) {
       const file = evt.target.files.item(0);
       const reader = new FileReader();
       reader.onload = e => {
-        this.url = e.target.result;
+        this.$emit("urlChange", e.target.result);
       };
       reader.readAsDataURL(file);
     }

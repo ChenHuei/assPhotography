@@ -5,11 +5,9 @@
         <div class="name">相簿名稱</div>
         <input type="text" class="input" v-model.trim="project.name" />
       </div>
-      <div class="cover">
-        <div class="name">相簿封面(主)</div>
-        <Upload />
-        <div class="name">相簿封面(副)</div>
-        <Upload />
+      <div class="cover" v-for="item in ADMIN_PROJECT_INFO" :key="item.value">
+        <div class="name">{{item.name}}</div>
+        <Upload :url="project[item.value]" @urlChange="changeUrl($event, item.value)" />
       </div>
     </div>
     <div class="right">
@@ -22,6 +20,7 @@
 
 <script>
 import { db } from "../main.js";
+import { ADMIN_PROJECT_INFO } from "../constants";
 import { Upload } from "../components/index";
 export default {
   name: "AdminProject",
@@ -30,18 +29,13 @@ export default {
   },
   data() {
     return {
-      photoURL: "",
-      project: {}
+      project: {},
+      ADMIN_PROJECT_INFO
     };
   },
   methods: {
-    fileHandler(event) {
-      const file = event.target.files[0];
-      const reader = new FileReader();
-      reader.onload = e => {
-        this.photoURL = e.target.result;
-      };
-      reader.readAsDataURL(file);
+    changeUrl(value, target) {
+      this.$set(this.project, target, value);
     }
   },
   mounted() {
@@ -61,6 +55,7 @@ export default {
   @include size(100%, auto);
   @include flexCenter;
   justify-content: space-between;
+  align-items: flex-start;
   > .left,
   > .right {
     @include flexCenter;
