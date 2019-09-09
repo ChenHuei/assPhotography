@@ -24,11 +24,16 @@
 import { db } from "../main.js";
 export default {
   name: "AdminProjects",
+  props: {
+    keyword: {
+      type: String,
+      required: true
+    }
+  },
   data() {
     return {
       isHover: false,
       id: 0,
-      keyword: "",
       albums: []
     };
   },

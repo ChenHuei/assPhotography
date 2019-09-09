@@ -1,7 +1,7 @@
 <template>
   <div class="admin">
-    <Searchbar />
-    <router-view :key="$route.fullPath" />
+    <Searchbar :keyword.sync="keyword" />
+    <router-view :key="$route.fullPath" :keyword="keyword" />
   </div>
 </template>
 
@@ -11,6 +11,11 @@ export default {
   name: "Admin",
   components: {
     Searchbar
+  },
+  data() {
+    return {
+      keyword: ""
+    };
   }
 };
 </script>

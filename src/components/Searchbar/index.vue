@@ -24,7 +24,8 @@ export default {
   name: "SearcbBar",
   props: {
     keyword: {
-      type: String
+      type: String,
+      required: true
     },
     isHide: {
       type: Boolean,
