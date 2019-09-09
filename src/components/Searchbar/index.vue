@@ -78,8 +78,9 @@ export default {
   @include size(100%, 80px);
   @include flexCenter;
   justify-content: space-between;
-  padding: 12px 60px;
+  padding: 12px 5vw;
   background-color: color(grey);
+  transition: 0.5s;
   > .links {
     @include size(100%);
     @include flexCenter;
@@ -138,6 +139,24 @@ export default {
       &:focus {
         border: 1px solid color(blue);
         transition: 0.5s;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 660px) and (max-width: 800px) {
+  .searchBar {
+    padding: 12px 10vw;
+  }
+}
+
+@media screen and (max-width: 659px) {
+  .searchBar {
+    > .links {
+      font-size: 12px;
+      > .item {
+        padding: 4px 8px;
+        margin-right: 8x;
       }
     }
   }

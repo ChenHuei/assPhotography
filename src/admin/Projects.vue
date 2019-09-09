@@ -14,7 +14,6 @@
           @mouseleave="leaveHandler"
         ></div>
         <div class="name">{{item.name}}</div>
-        <div class="time">{{item.time}}</div>
       </router-link>
     </div>
   </div>
@@ -88,17 +87,16 @@ export default {
 @import "../styles/import";
 .projects {
   @include size(100%, auto);
-  min-height: 100%;
   overflow: hidden;
   > .items {
     @include size(100%, auto);
     @include flexCenter;
     justify-content: flex-start;
     flex-wrap: wrap;
-    padding: 5% 10%;
+    padding: 5vw 5vw 60px;
     > .item {
-      @include size(calc(25% - 24px), 280px);
-      margin: 0 24px 48px 0;
+      @include size(auto, 24vw);
+      margin: 0 calc(((100vw - 82vw) - 15px) / 3) 24px 0;
       color: color(primary);
       text-decoration: none;
       cursor: pointer;
@@ -106,16 +104,16 @@ export default {
         opacity: 0.6;
       }
       &:nth-child(4n + 4) {
-        margin: 0 0 48px 0;
+        margin: 0 0 24px 0;
       }
       > .cover {
-        @include size(100%, 200px);
+        @include size(18vw);
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center center;
       }
       > .name {
-        margin: 32px 0 16px 0;
+        margin: 32px 0 0 0;
         font-size: 16px;
         text-align: center;
       }
@@ -123,6 +121,69 @@ export default {
         font-size: 12px;
         text-align: center;
         opacity: 0.6;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 801px) and (max-width: 1024px) {
+  .projects {
+    > .items {
+      > .item {
+        @include size(auto, 30vw);
+        margin: 0 calc(((100vw - 82vw) - 15px) / 2) 24px 0;
+        &:nth-child(4n + 4) {
+          margin: 0 calc(((100vw - 82vw) - 15px) / 2) 24px 0;
+        }
+        &:nth-child(3n + 3) {
+          margin: 0 0 24px 0;
+        }
+        > .cover {
+          @include size(24vw);
+        }
+        > .name {
+          margin: 28px 0 0 0;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 660px) and (max-width: 800px) {
+  .projects {
+    > .items {
+      padding: 5vw 10vw 60px;
+      > .item {
+        @include size(auto, 44vw);
+        margin: 0 calc(((100vw - 88vw) - 15px)) 24px 0;
+        &:nth-child(4n + 4),
+        &:nth-child(3n + 3) {
+          margin: 0 calc(((100vw - 88vw) - 15px)) 24px 0;
+        }
+        &:nth-child(2n + 2) {
+          margin: 0 0 24px 0;
+        }
+        > .cover {
+          @include size(34vw);
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 659px) {
+  .projects {
+    > .items {
+      > .item {
+        @include size(auto, 60vw);
+        margin: 0 auto 24px;
+        &:nth-child(4n + 4),
+        &:nth-child(3n + 3),
+        &:nth-child(2n + 2) {
+          margin: 0 auto 24px;
+        }
+        > .cover {
+          @include size(48vw);
+        }
       }
     }
   }
