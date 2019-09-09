@@ -11,8 +11,26 @@
       </div>
     </div>
     <div class="right">
-      <div class="photos">
+      <div class="album">
         <div class="name">照片</div>
+        <div class="photos">
+          <div class="photo" v-for="(photo, index) in project.photos" :key="photo.url">
+            <div class="img" :style="imgHandler(photo.url)"></div>
+            <div class="remove" @click="removeHandler(index)">X</div>
+          </div>
+        </div>
+        <label class="label">
+          <input
+            class="file"
+            type="file"
+            accept="image/jpg, image/jpeg, image/png"
+            @change="fileHandler"
+          />
+          <div class="placeholder">
+            <font-awesome-icon icon="image" />
+            <span>上傳圖片</span>
+          </div>
+        </label>
       </div>
     </div>
   </div>
@@ -36,6 +54,24 @@ export default {
   methods: {
     changeUrl(value, target) {
       this.$set(this.project, target, value);
+    },
+    imgHandler(url) {
+      return {
+        backgroundImage: `url(${url})`
+      };
+    },
+    fileHandler(evt) {
+      const file = evt.target.files.item(0);
+      const reader = new FileReader();
+      reader.onload = e => {
+        this.project.photos.push({
+          url: e.target.result
+        });
+      };
+      reader.readAsDataURL(file);
+    },
+    removeHandler(index) {
+      this.project.photos.splice(index, 1);
     }
   },
   mounted() {
@@ -83,6 +119,72 @@ export default {
         outline: none;
         &:focus {
           border: 1px solid color(primary);
+        }
+      }
+    }
+  }
+  > .right {
+    > .album {
+      @include size(100%, auto);
+      @include flexCenter;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      > .photos {
+        @include flexCenter;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        > .photo {
+          @include size(auto);
+          position: relative;
+          margin: 12px 12px 12px 0;
+          cursor: pointer;
+          &:hover {
+            opacity: 0.6;
+            > .remove {
+              opacity: 1;
+            }
+          }
+          > .img {
+            @include size(120px);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+          }
+          > .remove {
+            @include size(20px);
+            @include flexCenter;
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            font-size: 12px;
+            color: color(white);
+            background-color: color(red);
+            border-radius: 50%;
+            opacity: 0;
+            transition: 0.5s;
+          }
+        }
+      }
+      > .label {
+        @include size(100%, auto);
+        > .file {
+          display: none;
+        }
+        > .placeholder {
+          @include size(100%, 40px);
+          @include flexCenter;
+          margin-bottom: 12px;
+          font-size: 28px;
+          border: 1px solid color(primary);
+          border-radius: 8px;
+          cursor: pointer;
+          &:hover {
+            opacity: 0.6;
+          }
+          > span {
+            margin-left: 12px;
+            font-size: 20px;
+          }
         }
       }
     }
