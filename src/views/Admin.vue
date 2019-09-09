@@ -1,6 +1,6 @@
 <template>
   <div class="admin">
-    <Searchbar :keyword.sync="keyword" />
+    <Searchbar :keyword.sync="keyword" :isHide="isHide" />
     <router-view :key="$route.fullPath" :keyword="keyword" />
   </div>
 </template>
@@ -16,6 +16,11 @@ export default {
     return {
       keyword: ""
     };
+  },
+  computed: {
+    isHide() {
+      return this.$route.fullPath.split("/").length === 4;
+    }
   }
 };
 </script>

@@ -1,27 +1,20 @@
 <template>
   <div class="project">
-    <div class="container">
-      <div class="navbar">
-        <div class="button back" @click="back">返回</div>
-        <div class="button edit" @click="edit">{{editTitleHandler}}</div>
+    <div class="left">
+      <div class="title">
+        <div class="name">相簿名稱</div>
+        <input type="text" class="input" v-model.trim="project.name" />
       </div>
-      <div class="information">
-        <div :class="itemClassHandler">
-          <span>相簿名稱</span>
-          <input type="text" v-model="project.name" />
-        </div>
-        <div :class="itemClassHandler">
-          <span>相簿封面(主)</span>
-          <figure>
-            <img :src="project.cover" />
-          </figure>
-        </div>
-        <div :class="itemClassHandler">
-          <span>相簿封面(副)</span>
-          <figure>
-            <img :src="project.hover" />
-          </figure>
-        </div>
+      <div class="cover">
+        <div class="name">相簿封面(主)</div>
+        <Upload />
+        <div class="name">相簿封面(副)</div>
+        <Upload />
+      </div>
+    </div>
+    <div class="right">
+      <div class="photos">
+        <div class="name">照片</div>
       </div>
     </div>
   </div>
@@ -29,35 +22,26 @@
 
 <script>
 import { db } from "../main.js";
+import { Upload } from "../components/index";
 export default {
   name: "AdminProject",
+  components: {
+    Upload
+  },
   data() {
     return {
-      isEdit: false,
-      keyword: "",
+      photoURL: "",
       project: {}
     };
   },
-  computed: {
-    editTitleHandler() {
-      return this.isEdit ? "完成" : "編輯";
-    },
-    itemClassHandler() {
-      return {
-        item: true,
-        edit: this.isEdit
-      };
-    }
-  },
   methods: {
-    changeKeyword(e) {
-      this.keyword = e;
-    },
-    back() {
-      this.$router.go(-1);
-    },
-    edit() {
-      this.isEdit = !this.isEdit;
+    fileHandler(event) {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+      reader.onload = e => {
+        this.photoURL = e.target.result;
+      };
+      reader.readAsDataURL(file);
     }
   },
   mounted() {
@@ -75,60 +59,50 @@ export default {
 @import "../styles/import";
 .project {
   @include size(100%, auto);
-  > .container {
-    @include size(100%, auto);
-    padding: 5% 10%;
-    > .navbar {
+  @include flexCenter;
+  justify-content: space-between;
+  > .left,
+  > .right {
+    @include flexCenter;
+    @include size(50%, auto);
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    padding: 5vw;
+  }
+  > .left {
+    > .title,
+    > .cover {
       @include size(100%, auto);
-      @include flexCenter;
-      justify-content: space-between;
-      margin-bottom: 40px;
-      > .button {
-        @include size(120px, 40px);
-        @include flexCenter;
-        border: 1px solid color(primary);
-        border-radius: 8px;
-        transition: 0.5s;
-        cursor: pointer;
-        &:hover {
-          color: color(white);
-          background-color: color(primary);
-        }
-      }
     }
-    > .information {
-      > .item {
-        @include size(100%, auto);
-        @include flexCenter;
-        justify-content: space-between;
-        padding: 16px 0;
-        > input {
-          @include size(calc(25% + 16px), auto);
-          padding: 8px 16px;
-          border: 1px solid transparent;
-          border-radius: 8px;
-          outline: none;
-          pointer-events: none;
-        }
-        > figure {
-          @include size(25%, auto);
-          margin: 0;
-          overflow: hidden;
-          > img {
-            @include size(100%);
-          }
-        }
-        &.edit {
-          > input {
-            border: 1px solid color(grey);
-            pointer-events: auto;
-            &:focus {
-              border: 1px solid color(blue);
-            }
-          }
+    > .title {
+      @include flexCenter;
+      justify-content: flex-start;
+      margin-bottom: 24px;
+      > .input {
+        @include size(calc(100% - 164px), auto);
+        padding: 8px 12px;
+        font-size: 18px;
+        color: color(blue);
+        border: 1px solid color(grey);
+        border-radius: 4px;
+        outline: none;
+        &:focus {
+          border: 1px solid color(primary);
         }
       }
     }
   }
+}
+
+.name {
+  @include size(128px, auto);
+  @include flexCenter;
+  padding: 6px 12px;
+  margin-right: 36px;
+  color: color(white);
+  background-color: color(blue);
+  border: 1px solid color(blue);
+  border-radius: 8px;
+  letter-spacing: 1px;
 }
 </style>

@@ -10,7 +10,8 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import {
   faEnvelope,
   faMobileAlt,
-  faSearch
+  faSearch,
+  faImage
 } from '@fortawesome/free-solid-svg-icons';
 import {
   faFacebookF,
@@ -26,7 +27,8 @@ library.add(
   faFacebookF,
   faInstagram,
   faLine,
-  faSearch
+  faSearch,
+  faImage
 );
 
 Vue.use(VueFire);

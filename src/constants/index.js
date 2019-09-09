@@ -34,11 +34,11 @@ export const ADMIN_ITEMS = [
   {
     name: 'Projects',
     link: '/admin/projects'
-  },
-  {
-    name: 'Videos',
-    link: '/admin/videos'
   }
+  // {
+  //   name: 'Videos',
+  //   link: '/admin/videos'
+  // }
 ];
 
 export const HOME_ITEMS = [
