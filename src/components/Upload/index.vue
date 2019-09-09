@@ -1,5 +1,6 @@
 <template>
   <div class="upload">
+    <img class="preview" :src="url" />
     <label class="label">
       <input
         class="file"
@@ -12,7 +13,6 @@
         <span>上傳圖片</span>
       </div>
     </label>
-    <img class="preview" :src="url" />
   </div>
 </template>
 
@@ -23,7 +23,7 @@ export default {
     url: {
       type: String,
       required: true,
-      default: ''
+      default: ""
     }
   },
   methods: {
@@ -53,7 +53,7 @@ export default {
     > .placeholder {
       @include size(100%, 40px);
       @include flexCenter;
-      margin-bottom: 12px;
+      margin-top: 12px;
       font-size: 28px;
       border: 1px solid color(primary);
       border-radius: 8px;

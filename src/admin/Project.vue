@@ -108,9 +108,10 @@ export default {
     > .title {
       @include flexCenter;
       justify-content: flex-start;
+      flex-wrap: wrap;
       margin-bottom: 24px;
       > .input {
-        @include size(calc(100% - 164px), auto);
+        @include size(100%, auto);
         padding: 8px 12px;
         font-size: 18px;
         color: color(blue);
@@ -128,6 +129,7 @@ export default {
       @include size(100%, auto);
       @include flexCenter;
       justify-content: flex-start;
+      align-items: flex-start;
       flex-wrap: wrap;
       > .photos {
         @include flexCenter;
@@ -136,7 +138,7 @@ export default {
         > .photo {
           @include size(auto);
           position: relative;
-          margin: 12px 12px 12px 0;
+          margin: 0 12px 12px 0;
           cursor: pointer;
           &:hover {
             opacity: 0.6;
@@ -195,7 +197,7 @@ export default {
   @include size(128px, auto);
   @include flexCenter;
   padding: 6px 12px;
-  margin-right: 36px;
+  margin: 0 36px 12px 0;
   color: color(white);
   background-color: color(blue);
   border: 1px solid color(blue);
