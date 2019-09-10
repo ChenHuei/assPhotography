@@ -1,15 +1,21 @@
 <template>
-  <div class="alert">
+  <div class="message">
     <div class="bgc"></div>
     <div :class="containerClassHandler">
-      <slot></slot>
+      <h4>{{this.message}}</h4>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "Alert",
+  name: "Message",
+  props: {
+    message: {
+      type: String,
+      default: "儲存成功"
+    }
+  },
   data() {
     return {
       isMoving: true
@@ -33,7 +39,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "../../styles/import";
-.alert {
+.message {
   @include fixed;
   @include size(100vw, 100vh);
   @include flexCenter;

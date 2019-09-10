@@ -1,6 +1,6 @@
 <template>
   <div class="upload">
-    <img class="preview" :src="url" />
+    <img v-if="isPreview" class="preview" :src="url" />
     <label class="label">
       <input
         class="file"
@@ -22,8 +22,11 @@ export default {
   props: {
     url: {
       type: String,
-      required: true,
       default: ""
+    },
+    isPreview: {
+      type: Boolean,
+      default: true
     }
   },
   methods: {
