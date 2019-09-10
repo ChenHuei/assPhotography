@@ -1,5 +1,8 @@
 <template>
   <div class="project">
+    <div class="save" @click="saveHandler">
+      <div class="name">儲存</div>
+    </div>
     <div class="left">
       <div class="title">
         <div class="name">相簿名稱</div>
@@ -72,6 +75,11 @@ export default {
     },
     removeHandler(index) {
       this.project.photos.splice(index, 1);
+    },
+    saveHandler() {
+      db.collection("albums")
+        .doc(this.$route.params.id)
+        .set(this.project);
     }
   },
   mounted() {
@@ -90,8 +98,22 @@ export default {
 .project {
   @include size(100%, auto);
   @include flexCenter;
+  position: relative;
   justify-content: space-between;
   align-items: flex-start;
+  > .save {
+    position: absolute;
+    top: -40px;
+    right: 5vw;
+    transform: translateY(-50%);
+    cursor: pointer;
+    &:hover {
+      opacity: 0.6;
+    }
+    > .name {
+      margin: 0;
+    }
+  }
   > .left,
   > .right {
     @include flexCenter;
