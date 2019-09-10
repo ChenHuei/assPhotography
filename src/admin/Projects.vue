@@ -1,9 +1,10 @@
 <template>
   <div class="projects">
+    <Loading v-if="isLoading" />
     <div class="items">
       <router-link
         class="item"
-        v-for="item in showAlbums"
+        v-for="item in list"
         :key="item.name"
         :to="routerLinkHanlder(item.id)"
       >
@@ -21,8 +22,12 @@
 
 <script>
 import { db } from "../main.js";
+import { Loading } from "../components";
 export default {
   name: "AdminProjects",
+  components: {
+    Loading
+  },
   props: {
     keyword: {
       type: String,
@@ -32,13 +37,14 @@ export default {
   data() {
     return {
       isHover: false,
+      isLoading: false,
       id: 0,
-      albums: []
+      projects: []
     };
   },
   computed: {
-    showAlbums() {
-      return this.albums.slice().filter(item => {
+    list() {
+      return this.projects.slice().filter(item => {
         return item.name.toLowerCase().indexOf(this.keyword.toLowerCase()) > -1;
       });
     }
@@ -67,6 +73,7 @@ export default {
     }
   },
   mounted() {
+    this.isLoading = true;
     db.collection("albums")
       .get()
       .then(res => {
@@ -75,7 +82,10 @@ export default {
             .doc(id)
             .get()
             .then(res => {
-              this.albums.push(res.data());
+              this.projects.push(res.data());
+            })
+            .finally(() => {
+              this.isLoading = false;
             });
         });
       });
@@ -93,59 +103,51 @@ export default {
     @include flexCenter;
     justify-content: flex-start;
     flex-wrap: wrap;
-    padding: 5vw 5vw 60px;
-    > .item {
-      @include size(auto, 24vw);
-      margin: 0 calc(((100vw - 82vw) - 15px) / 3) 24px 0;
-      color: color(primary);
-      text-decoration: none;
-      cursor: pointer;
-      &:hover {
-        opacity: 0.6;
-      }
-      &:nth-child(4n + 4) {
-        margin: 0 0 24px 0;
-      }
-      > .cover {
-        @include size(18vw);
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: center center;
-      }
-      > .name {
-        margin: 32px 0 0 0;
-        font-size: 16px;
-        text-align: center;
-      }
-      > .time {
-        font-size: 12px;
-        text-align: center;
-        opacity: 0.6;
-      }
-    }
+    padding: 5vw;
+  }
+}
+.item {
+  @include size(auto, 24vw);
+  margin: 0 calc(((100vw - 82vw) - 15px) / 3) 24px 0;
+  color: color(primary);
+  text-decoration: none;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.6;
+  }
+  &:nth-child(4n + 4) {
+    margin: 0 0 24px 0;
   }
 }
 
+.cover {
+  @include size(18vw);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+.name {
+  @include size(18vw, 6vw);
+  @include flexCenter;
+  font-size: 16px;
+}
+
 @media screen and (min-width: 801px) and (max-width: 1024px) {
-  .projects {
-    > .items {
-      > .item {
-        @include size(auto, 30vw);
-        margin: 0 calc(((100vw - 82vw) - 15px) / 2) 24px 0;
-        &:nth-child(4n + 4) {
-          margin: 0 calc(((100vw - 82vw) - 15px) / 2) 24px 0;
-        }
-        &:nth-child(3n + 3) {
-          margin: 0 0 24px 0;
-        }
-        > .cover {
-          @include size(24vw);
-        }
-        > .name {
-          margin: 28px 0 0 0;
-        }
-      }
+  .item {
+    @include size(auto, 30vw);
+    margin: 0 calc(((100vw - 82vw) - 15px) / 2) 24px 0;
+    &:nth-child(4n + 4) {
+      margin: 0 calc(((100vw - 82vw) - 15px) / 2) 24px 0;
     }
+    &:nth-child(3n + 3) {
+      margin: 0 0 24px 0;
+    }
+  }
+  .cover {
+    @include size(24vw);
+  }
+  .name {
+    @include size(24vw, 6vw);
   }
 }
 
@@ -153,39 +155,42 @@ export default {
   .projects {
     > .items {
       padding: 5vw 10vw 60px;
-      > .item {
-        @include size(auto, 44vw);
-        margin: 0 calc(((100vw - 88vw) - 15px)) 24px 0;
-        &:nth-child(4n + 4),
-        &:nth-child(3n + 3) {
-          margin: 0 calc(((100vw - 88vw) - 15px)) 24px 0;
-        }
-        &:nth-child(2n + 2) {
-          margin: 0 0 24px 0;
-        }
-        > .cover {
-          @include size(34vw);
-        }
-      }
     }
   }
-}
-@media screen and (max-width: 659px) {
-  .projects {
-    > .items {
-      > .item {
-        @include size(auto, 60vw);
-        margin: 0 auto 24px;
-        &:nth-child(4n + 4),
-        &:nth-child(3n + 3),
-        &:nth-child(2n + 2) {
-          margin: 0 auto 24px;
-        }
-        > .cover {
-          @include size(48vw);
-        }
-      }
+  .item {
+    @include size(auto, 44vw);
+    margin: 0 calc(((100vw - 88vw) - 15px)) 24px 0;
+    &:nth-child(4n + 4),
+    &:nth-child(3n + 3) {
+      margin: 0 calc(((100vw - 88vw) - 15px)) 24px 0;
     }
+    &:nth-child(2n + 2) {
+      margin: 0 0 24px 0;
+    }
+  }
+  .cover {
+    @include size(34vw);
+  }
+  .name {
+    @include size(34vw, 10vw);
+  }
+}
+
+@media screen and (max-width: 659px) {
+  .item {
+    @include size(auto, 60vw);
+    margin: 0 auto 24px;
+    &:nth-child(4n + 4),
+    &:nth-child(3n + 3),
+    &:nth-child(2n + 2) {
+      margin: 0 auto 24px;
+    }
+  }
+  .cover {
+    @include size(48vw);
+  }
+  .name {
+    @include size(48vw, 12vw);
   }
 }
 </style>
