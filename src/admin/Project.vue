@@ -1,5 +1,6 @@
 <template>
   <div class="project">
+    <Loading v-if="isLoading" />
     <div class="save" @click="saveHandler">
       <div class="name">儲存</div>
     </div>
@@ -42,14 +43,16 @@
 <script>
 import { db } from "../main.js";
 import { ADMIN_PROJECT_INFO } from "../constants";
-import { Upload } from "../components/index";
+import { Upload, Loading } from "../components/index";
 export default {
   name: "AdminProject",
   components: {
-    Upload
+    Upload,
+    Loading
   },
   data() {
     return {
+      isLoading: false,
       project: {},
       ADMIN_PROJECT_INFO
     };
@@ -77,17 +80,23 @@ export default {
       this.project.photos.splice(index, 1);
     },
     saveHandler() {
+      this.isLoading = true;
       db.collection("albums")
         .doc(this.$route.params.id)
-        .set(this.project);
+        .set(this.project)
+        .then(res => {
+          this.isLoading = false;
+        });
     }
   },
   mounted() {
+    this.isLoading = true;
     db.collection("albums")
       .doc(this.$route.params.id)
       .get()
       .then(res => {
         this.project = res.data();
+        this.isLoading = false;
       });
   }
 };
