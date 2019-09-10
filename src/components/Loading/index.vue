@@ -13,6 +13,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "../../styles/utils";
+
 .loading {
   @include fixed;
   @include size(100vw, 100vh);
@@ -25,9 +26,9 @@ export default {
     opacity: 0.2;
   }
   > .svg {
-    position: absolute;
     @include size(48px);
     @include backgroundImage("../../assets/loading.svg");
+    position: absolute;
   }
 }
 </style>

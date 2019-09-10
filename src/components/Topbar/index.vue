@@ -60,54 +60,52 @@ export default {
   @include flexCenter;
   flex-direction: column;
   padding: 48px 32px 32px;
-  box-sizing: border-box;
   > .title {
-    @include size(100%, auto);
+    @include size(100%, 40px);
     @include flexCenter;
     font-size: 40px;
     font-weight: 700;
-    line-height: 40px;
     letter-spacing: 2px;
     cursor: pointer;
   }
   > .icons {
-    margin: 32px 0;
-    > .icon {
-      margin-right: 24px;
-      font-size: 24px;
-      color: color(blue);
-      transition: 0.5s;
-      text-decoration: none;
-      cursor: pointer;
-      &:hover {
-        color: color(grey);
-      }
-      &:last-child {
-        margin-right: 0;
-      }
-    }
+    margin: 28px 0;
   }
   > .items {
     @include size(100%, auto);
     @include flexCenter;
-    > a {
-      padding: 8px 16px;
-      margin-right: 24px;
-      font-size: 16px;
-      color: color(grey);
-      transition: 0.5s;
-      text-decoration: none;
-      cursor: pointer;
-      &.active {
-        color: color(blue);
-      }
-      &:hover {
-        opacity: 0.6;
-      }
-      &:last-child {
-        margin-right: 0;
-      }
-    }
+  }
+}
+
+.icon,
+.item {
+  margin-right: 24px;
+  color: color(blue);
+  transition: 0.5s;
+  text-decoration: none;
+  cursor: pointer;
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.icon {
+  font-size: 24px;
+  color: color(blue);
+  &:hover {
+    color: color(grey);
+  }
+}
+
+.item {
+  padding: 8px 16px;
+  font-size: 16px;
+  color: color(grey);
+  &.active {
+    color: color(blue);
+  }
+  &:hover {
+    opacity: 0.6;
   }
 }
 
@@ -117,13 +115,11 @@ export default {
       font-size: 24px;
     }
     > .icons {
-      margin: 24px 0;
+      margin: 20px 0;
     }
-    > .items {
-      > a {
-        margin-right: 16px;
-      }
-    }
+  }
+  .item {
+    margin-right: 16px;
   }
 }
 </style>

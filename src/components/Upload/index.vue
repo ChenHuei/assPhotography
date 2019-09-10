@@ -10,7 +10,7 @@
       />
       <div class="placeholder">
         <font-awesome-icon icon="image" />
-        <span>上傳圖片</span>
+        <span class="span">上傳圖片</span>
       </div>
     </label>
   </div>
@@ -48,30 +48,31 @@ export default {
 .upload {
   @include size(100%, auto);
   margin: 12px 0 24px;
+  > .preview {
+    @include size(auto, 200px);
+  }
   > .label {
     @include size(100%, auto);
     > .file {
       display: none;
     }
-    > .placeholder {
-      @include size(100%, 40px);
-      @include flexCenter;
-      margin-top: 12px;
-      font-size: 28px;
-      border: 1px solid color(primary);
-      border-radius: 8px;
-      cursor: pointer;
-      &:hover {
-        opacity: 0.6;
-      }
-      > span {
-        margin-left: 12px;
-        font-size: 20px;
-      }
-    }
   }
-  > .preview {
-    @include size(auto, 200px);
+}
+
+.placeholder {
+  @include size(100%, 40px);
+  @include flexCenter;
+  margin-top: 12px;
+  font-size: 28px;
+  border: 1px solid color(primary);
+  border-radius: 8px;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.6;
+  }
+  > .span {
+    margin-left: 12px;
+    font-size: 20px;
   }
 }
 </style>

@@ -56,18 +56,17 @@ export default {
     position: absolute;
     left: 50%;
     top: 50%;
-    background-color: color(white);
     border-radius: 8px;
+    background-color: color(white);
+    box-shadow: 0 2px 8px lighten(color(black), 40);
     transform: translate(-50%, -50%);
     transition: 0.5s;
-    box-shadow: 0 2px 8px lighten(color(black), 40);
     z-index: 10;
     &.moving {
       top: 25%;
     }
     > h4 {
       margin: 0;
-      text-align: center;
       font-size: 24px;
     }
   }

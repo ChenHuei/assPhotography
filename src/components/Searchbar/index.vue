@@ -1,6 +1,6 @@
 <template>
   <div class="searchBar">
-    <div class="links">
+    <div class="items">
       <router-link
         v-for="item in ADMIN_ITEMS"
         :key="item.name"
@@ -13,7 +13,13 @@
         <font-awesome-icon icon="search" />
         <span>Search</span>
       </div>
-      <input type="text" v-model.trim="keywordHandler" @blur="reset" @focus="toggle" />
+      <input
+        class="keyword"
+        type="text"
+        v-model.trim="keywordHandler"
+        @blur="reset"
+        @focus="toggle"
+      />
     </label>
   </div>
 </template>
@@ -81,30 +87,13 @@ export default {
   padding: 12px 5vw;
   background-color: color(grey);
   transition: 0.5s;
-  > .links {
+  > .items {
     @include size(100%);
     @include flexCenter;
     justify-content: flex-start;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 700;
     letter-spacing: 1px;
-    > .item {
-      padding: 8px 16px;
-      margin-right: 12x;
-      color: color(black);
-      transition: 0.5s;
-      text-decoration: none;
-      cursor: pointer;
-      &.active {
-        color: color(blue);
-      }
-      &:hover {
-        opacity: 0.6;
-      }
-      &:last-child {
-        margin-right: 0;
-      }
-    }
   }
   > .search {
     @include size(320px, 40px);
@@ -117,30 +106,51 @@ export default {
         opacity: 0;
       }
     }
-    > .placeholder {
-      position: absolute;
-      left: 24px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: color(grey_dark);
-      > svg {
-        @include size(16px);
-      }
-      > span {
-        margin-left: 8px;
-      }
-    }
-    > input {
-      @include size(100%);
-      padding: 8px 16px;
-      border: 1px solid color(grey);
-      border-radius: 24px;
-      outline: none;
-      &:focus {
-        border: 1px solid color(blue);
-        transition: 0.5s;
-      }
-    }
+  }
+}
+
+.item {
+  padding: 8px 16px;
+  margin-right: 12x;
+  color: color(black);
+  transition: 0.5s;
+  text-decoration: none;
+  cursor: pointer;
+  &.active {
+    color: color(blue);
+  }
+  &:hover {
+    opacity: 0.6;
+  }
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.placeholder {
+  position: absolute;
+  left: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: color(grey_dark);
+  transition: 0.5s;
+  > svg {
+    @include size(16px);
+  }
+  > span {
+    margin-left: 8px;
+  }
+}
+
+.keyword {
+  @include size(100%);
+  padding: 8px 16px;
+  border: 1px solid color(grey);
+  border-radius: 24px;
+  outline: none;
+  &:focus {
+    border: 1px solid color(blue);
+    transition: 0.5s;
   }
 }
 
@@ -152,13 +162,13 @@ export default {
 
 @media screen and (max-width: 659px) {
   .searchBar {
-    > .links {
+    > .items {
       font-size: 12px;
-      > .item {
-        padding: 4px 8px;
-        margin-right: 8x;
-      }
     }
+  }
+  .item {
+    padding: 4px 8px;
+    margin-right: 8x;
   }
 }
 </style>

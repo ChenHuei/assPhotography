@@ -1,17 +1,15 @@
 <template>
   <div class="single">
-    <div
-      class="bgc"
-      @click="back"></div>
-    <div class="image">
-      <img :src="photo.url">
+    <div class="bgc" @click="back"></div>
+    <div class="photo">
+      <img class="image" :src="photo.url" />
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'SinglePhoto',
+  name: "SinglePhoto",
   props: {
     photo: {
       type: Object,
@@ -19,47 +17,37 @@ export default {
     }
   },
   methods: {
-    back () {
-      this.$emit('back')
+    back() {
+      this.$emit("back");
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-@import '../../styles/import';
+@import "../../styles/import";
 
 .single {
-  @include size(100%);
   @include fixed;
+  @include size(100vw, 100vh);
   @include flexCenter;
-  z-index: 10;
+  z-index: 100;
   > .bgc {
-    @include size(100%);
     @include fixed;
+    @include size(100%);
     background-color: color(black);
-    opacity: .8;
+    opacity: 0.8;
     cursor: pointer;
   }
-  > .image {
+  > .photo {
     @include size(auto);
     @include flexCenter;
     position: absolute;
-    > img {
+    > .image {
       @include size(80%);
       box-shadow: 0 10px 20px color(shadow);
-      transition: .5s;
+      transition: 0.5s;
     }
   }
-}
-
-@media screen and (max-width: 800px) {
-  .single {
-  > .image {
-    > img {
-      @include size(80%);
-    }
-  }
-}
 }
 </style>
