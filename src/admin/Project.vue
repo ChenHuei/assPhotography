@@ -1,6 +1,9 @@
 <template>
   <div class="project">
     <Loading v-if="isLoading" />
+    <Alert v-if="isShowAlert">
+      <h4>儲存成功</h4>
+    </Alert>
     <div class="save" @click="saveHandler">
       <div class="name">儲存</div>
     </div>
@@ -43,16 +46,19 @@
 <script>
 import { db } from "../main.js";
 import { ADMIN_PROJECT_INFO } from "../constants";
-import { Upload, Loading } from "../components/index";
+import { Upload, Loading, Alert } from "../components/index";
+import { setTimeout } from "timers";
 export default {
   name: "AdminProject",
   components: {
     Upload,
-    Loading
+    Loading,
+    Alert
   },
   data() {
     return {
       isLoading: false,
+      isShowAlert: false,
       project: {},
       ADMIN_PROJECT_INFO
     };
@@ -86,6 +92,10 @@ export default {
         .set(this.project)
         .then(res => {
           this.isLoading = false;
+          this.isShowAlert = true;
+          setTimeout(() => {
+            this.isShowAlert = false;
+          }, 1500);
         });
     }
   },
