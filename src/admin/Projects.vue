@@ -55,7 +55,7 @@ export default {
       const url =
         this.id === item.id
           ? this.isHover
-            ? item.hover
+            ? item.hover || item.cover
             : item.cover
           : item.cover;
       return {
