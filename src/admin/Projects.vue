@@ -16,6 +16,7 @@
         ></div>
         <div class="name">{{item.name}}</div>
       </router-link>
+      <router-link class="item create" :to="routerLinkHanlder('create')">+</router-link>
     </div>
   </div>
 </template>
@@ -78,16 +79,15 @@ export default {
       .get()
       .then(res => {
         res.docs.forEach(({ id }) => {
+          if (id === "default") return;
           db.collection("albums")
             .doc(id)
             .get()
             .then(res => {
               this.projects.push(res.data());
-            })
-            .finally(() => {
-              this.isLoading = false;
             });
         });
+        this.isLoading = false;
       });
   }
 };
@@ -100,14 +100,15 @@ export default {
   overflow: hidden;
   > .items {
     @include size(100%, auto);
-    @include flexCenter;
+    display: flex;
     justify-content: flex-start;
+    align-items: flex-start;
     flex-wrap: wrap;
     padding: 5vw;
   }
 }
 .item {
-  @include size(auto, 24vw);
+  @include size(18vw, 24vw);
   margin: 0 calc(((100vw - 82vw) - 15px) / 3) 24px 0;
   color: color(primary);
   text-decoration: none;
@@ -117,6 +118,13 @@ export default {
   }
   &:nth-child(4n + 4) {
     margin: 0 0 24px 0;
+  }
+  &.create {
+    @include size(18vw);
+    @include flexCenter;
+    font-size: 60px;
+    border: 1px solid color(primary);
+    border-radius: 4px;
   }
 }
 
@@ -134,13 +142,16 @@ export default {
 
 @media screen and (min-width: 801px) and (max-width: 1024px) {
   .item {
-    @include size(auto, 30vw);
+    @include size(24vw, 30vw);
     margin: 0 calc(((100vw - 82vw) - 15px) / 2) 24px 0;
     &:nth-child(4n + 4) {
       margin: 0 calc(((100vw - 82vw) - 15px) / 2) 24px 0;
     }
     &:nth-child(3n + 3) {
       margin: 0 0 24px 0;
+    }
+    &.create {
+      @include size(24vw);
     }
   }
   .cover {
@@ -158,7 +169,7 @@ export default {
     }
   }
   .item {
-    @include size(auto, 44vw);
+    @include size(34vw, 44vw);
     margin: 0 calc(((100vw - 88vw) - 15px)) 24px 0;
     &:nth-child(4n + 4),
     &:nth-child(3n + 3) {
@@ -166,6 +177,9 @@ export default {
     }
     &:nth-child(2n + 2) {
       margin: 0 0 24px 0;
+    }
+    &.create {
+      @include size(34vw);
     }
   }
   .cover {
@@ -178,12 +192,15 @@ export default {
 
 @media screen and (max-width: 659px) {
   .item {
-    @include size(auto, 60vw);
+    @include size(48vw, 60vw);
     margin: 0 auto 24px;
     &:nth-child(4n + 4),
     &:nth-child(3n + 3),
     &:nth-child(2n + 2) {
       margin: 0 auto 24px;
+    }
+    &.create {
+      @include size(48vw);
     }
   }
   .cover {

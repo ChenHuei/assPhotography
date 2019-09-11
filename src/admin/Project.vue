@@ -1,9 +1,9 @@
 <template>
   <div class="project">
     <Loading v-if="isLoading" />
-    <Message v-if="isMessage" />
+    <Message v-if="isMessage" :message="messageHandler" />
     <div class="save" @click="saveHandler">
-      <Title :title="'儲存'" />
+      <Title :title="buttonTitleHandler" />
     </div>
     <div class="left">
       <div class="name">
@@ -32,7 +32,7 @@
 
 <script>
 import { db } from "../main.js";
-import { ADMIN_PROJECT_INFO } from "../constants";
+import { ADMIN_PROJECT_INFO, ID_NUMBERS, ID_FACTORS } from "../constants";
 import { Upload, Loading, Message, Title } from "../components/index";
 export default {
   name: "AdminProject",
@@ -44,11 +44,29 @@ export default {
   },
   data() {
     return {
+      isCreate: false,
       isLoading: false,
       isMessage: false,
       project: {},
-      ADMIN_PROJECT_INFO
+      ADMIN_PROJECT_INFO,
+      ID_FACTORS,
+      ID_NUMBERS
     };
+  },
+  computed: {
+    messageHandler() {
+      return `${this.buttonTitleHandler}成功！`;
+    },
+    buttonTitleHandler() {
+      return this.isCreate ? "新增" : "儲存";
+    },
+    getRandomID() {
+      return [...Array(this.ID_NUMBERS)].reduce((acc, item) => {
+        return (acc += this.ID_FACTORS[
+          Math.round(Math.random() * (this.ID_FACTORS.length - 1))
+        ]);
+      }, "");
+    }
   },
   methods: {
     changeCover(value, target) {
@@ -69,13 +87,17 @@ export default {
     },
     saveHandler() {
       this.isLoading = true;
+      if (this.isCreate) {
+        this.project.id = this.getRandomID;
+      }
       db.collection("albums")
-        .doc(this.$route.params.id)
+        .doc(this.project.id)
         .set(this.project)
         .then(res => {
           this.isMessage = true;
           setTimeout(() => {
             this.isMessage = false;
+            if (this.isCreate) this.$router.go(-1);
           }, 1200);
         })
         .finally(() => {
@@ -85,8 +107,14 @@ export default {
   },
   mounted() {
     this.isLoading = true;
+    const id = this.$route.params.id;
+    if (id === "create") {
+      this.isCreate = true;
+      this.isLoading = false;
+      return;
+    }
     db.collection("albums")
-      .doc(this.$route.params.id)
+      .doc(id)
       .get()
       .then(res => {
         this.project = res.data();
