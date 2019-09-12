@@ -1,6 +1,8 @@
 <template>
   <div class="projects">
     <Loading v-if="isLoading" />
+    <Message v-if="isMessage" :message="'刪除成功'" />
+    <Popover v-if="isPopOver" @confirm="confirmHandler" />
     <div class="items">
       <div class="item" v-for="item in list" :key="item.name">
         <router-link class="link" :to="routerLinkHanlder(item.id)">
@@ -21,11 +23,13 @@
 
 <script>
 import { db } from "../main.js";
-import { Loading } from "../components";
+import { Loading, Popover, Message } from "../components";
 export default {
   name: "AdminProjects",
   components: {
-    Loading
+    Loading,
+    Popover,
+    Message
   },
   props: {
     keyword: {
@@ -36,8 +40,12 @@ export default {
   data() {
     return {
       isHover: false,
+      isMessage: false,
+      isConfirm: false,
+      isPopOver: false,
       isLoading: false,
       id: 0,
+      target: "",
       projects: []
     };
   },
@@ -51,6 +59,15 @@ export default {
   methods: {
     initProjects() {
       this.projects = [];
+    },
+    confirmHandler(value) {
+      this.isConfirm = value === "YES";
+      this.isPopOver = false;
+      if (!this.isConfirm) {
+        this.isLoading = false;
+        return;
+      }
+      this.remove();
     },
     coverStyleHandler(item) {
       const url =
@@ -73,15 +90,22 @@ export default {
     routerLinkHanlder(id) {
       return `/admin/projects/${id}`;
     },
-    removeHandler(id) {
-      this.isLoading = true;
+    remove() {
       db.collection("albums")
-        .doc(id)
+        .doc(this.target)
         .delete()
         .then(res => {
-          alert("刪除成功");
+          this.isMessage = true;
+          setTimeout(() => {
+            this.isMessage = false;
+          }, 1200);
           this.fetchData();
         });
+    },
+    removeHandler(id) {
+      this.isLoading = true;
+      this.isPopOver = true;
+      this.target = id;
     },
     fetchData() {
       this.isLoading = true;
@@ -98,13 +122,11 @@ export default {
               .get()
               .then(res => {
                 this.projects.push(res.data());
-                if (index === length - 2) {
-                  setTimeout(() => {
-                    this.isLoading = false;
-                  }, 100);
-                }
               });
           });
+          setTimeout(() => {
+            this.isLoading = false;
+          }, 500);
         });
     }
   },
