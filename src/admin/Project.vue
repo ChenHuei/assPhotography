@@ -88,7 +88,11 @@ export default {
     saveHandler() {
       this.isLoading = true;
       if (this.isCreate) {
-        this.project.id = this.getRandomID;
+        this.project = {
+          ...this.project,
+          id: this.getRandomID,
+          photos: []
+        };
       }
       db.collection("albums")
         .doc(this.project.id)

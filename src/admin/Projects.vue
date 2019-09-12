@@ -2,20 +2,18 @@
   <div class="projects">
     <Loading v-if="isLoading" />
     <div class="items">
-      <router-link
-        class="item"
-        v-for="item in list"
-        :key="item.name"
-        :to="routerLinkHanlder(item.id)"
-      >
-        <div
-          class="cover"
-          :style="coverStyleHandler(item)"
-          @mouseenter="enterHandler(item.id)"
-          @mouseleave="leaveHandler"
-        ></div>
-        <div class="name">{{item.name}}</div>
-      </router-link>
+      <div class="item" v-for="item in list" :key="item.name">
+        <router-link class="link" :to="routerLinkHanlder(item.id)">
+          <div
+            class="cover"
+            :style="coverStyleHandler(item)"
+            @mouseenter="enterHandler(item.id)"
+            @mouseleave="leaveHandler"
+          ></div>
+          <div class="name">{{item.name}}</div>
+        </router-link>
+        <div class="remove" @click="removeHandler(item.id)">X</div>
+      </div>
       <router-link class="item create" :to="routerLinkHanlder('create')">+</router-link>
     </div>
   </div>
@@ -51,6 +49,9 @@ export default {
     }
   },
   methods: {
+    initProjects() {
+      this.projects = [];
+    },
     coverStyleHandler(item) {
       const url =
         this.id === item.id
@@ -71,24 +72,44 @@ export default {
     },
     routerLinkHanlder(id) {
       return `/admin/projects/${id}`;
+    },
+    removeHandler(id) {
+      this.isLoading = true;
+      db.collection("albums")
+        .doc(id)
+        .delete()
+        .then(res => {
+          alert("刪除成功");
+          this.fetchData();
+        });
+    },
+    fetchData() {
+      this.isLoading = true;
+      this.initProjects();
+      db.collection("albums")
+        .get()
+        .then(res => {
+          const length = res.docs.length;
+          if (length === 1) this.isLoading = false;
+          res.docs.forEach(({ id }, index) => {
+            if (id === "default") return;
+            db.collection("albums")
+              .doc(id)
+              .get()
+              .then(res => {
+                this.projects.push(res.data());
+                if (index === length - 2) {
+                  setTimeout(() => {
+                    this.isLoading = false;
+                  }, 100);
+                }
+              });
+          });
+        });
     }
   },
   mounted() {
-    this.isLoading = true;
-    db.collection("albums")
-      .get()
-      .then(res => {
-        res.docs.forEach(({ id }) => {
-          if (id === "default") return;
-          db.collection("albums")
-            .doc(id)
-            .get()
-            .then(res => {
-              this.projects.push(res.data());
-            });
-        });
-        this.isLoading = false;
-      });
+    this.fetchData();
   }
 };
 </script>
@@ -107,14 +128,25 @@ export default {
     padding: 5vw;
   }
 }
-.item {
-  @include size(18vw, 24vw);
-  margin: 0 calc(((100vw - 82vw) - 15px) / 3) 24px 0;
+.item,
+.link {
   color: color(primary);
   text-decoration: none;
   cursor: pointer;
+}
+.item {
+  @include size(18vw, 24vw);
+  position: relative;
+  margin: 0 calc(((100vw - 82vw) - 15px) / 3) 24px 0;
   &:hover {
-    opacity: 0.6;
+    > .link {
+      > .cover {
+        opacity: 0.6;
+      }
+    }
+    > .remove {
+      opacity: 1;
+    }
   }
   &:nth-child(4n + 4) {
     margin: 0 0 24px 0;
@@ -125,9 +157,11 @@ export default {
     font-size: 60px;
     border: 1px solid color(primary);
     border-radius: 4px;
+    &:hover {
+      opacity: 0.6;
+    }
   }
 }
-
 .cover {
   @include size(18vw);
   background-size: cover;
@@ -138,6 +172,22 @@ export default {
   @include size(18vw, 6vw);
   @include flexCenter;
   font-size: 16px;
+}
+.remove {
+  @include size(24px);
+  @include flexCenter;
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  color: color(white);
+  background-color: color(red);
+  border-radius: 50%;
+  opacity: 0;
+  transition: 0.5s;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.8;
+  }
 }
 
 @media screen and (min-width: 801px) and (max-width: 1024px) {
