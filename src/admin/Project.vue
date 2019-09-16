@@ -47,7 +47,9 @@ export default {
       isCreate: false,
       isLoading: false,
       isMessage: false,
-      project: {},
+      project: {
+        photos: []
+      },
       ADMIN_PROJECT_INFO,
       ID_FACTORS,
       ID_NUMBERS
@@ -87,13 +89,7 @@ export default {
     },
     saveHandler() {
       this.isLoading = true;
-      if (this.isCreate) {
-        this.project = {
-          ...this.project,
-          id: this.getRandomID,
-          photos: []
-        };
-      }
+      if (this.isCreate) this.project.id = this.getRandomID;
       db.collection("albums")
         .doc(this.project.id)
         .set(this.project)
@@ -193,6 +189,7 @@ export default {
   flex-wrap: wrap;
   > .photos {
     @include flexCenter;
+    @include size(100%, auto);
     justify-content: flex-start;
     flex-wrap: wrap;
   }
@@ -227,6 +224,19 @@ export default {
     border-radius: 50%;
     opacity: 0;
     transition: 0.5s;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .project {
+    flex-direction: column;
+    > .left,
+    > .right {
+      @include size(100%, auto);
+    }
+    > .right {
+      padding: 0 5vw 5vw;
+    }
   }
 }
 </style>

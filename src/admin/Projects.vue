@@ -114,7 +114,10 @@ export default {
         .get()
         .then(res => {
           const length = res.docs.length;
-          if (length === 1) this.isLoading = false;
+          if (length === 1) {
+            this.isLoading = false;
+            return;
+          }
           res.docs.forEach(({ id }, index) => {
             if (id === "default") return;
             db.collection("albums")

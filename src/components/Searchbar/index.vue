@@ -122,6 +122,9 @@ export default {
   &:hover {
     opacity: 0.6;
   }
+  &:first-child {
+    margin-left: -16px;
+  }
   &:last-child {
     margin-right: 0;
   }
