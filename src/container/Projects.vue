@@ -2,7 +2,7 @@
   <div class="projects">
     <router-link
       class="item"
-      v-for="item in albums"
+      v-for="item in projects"
       :key="item.name"
       :to="routerLinkHanlder(item.id)"
     >
@@ -25,7 +25,7 @@ export default {
     return {
       isHover: false,
       id: 0,
-      albums: []
+      projects: []
     };
   },
   methods: {
@@ -52,15 +52,15 @@ export default {
     }
   },
   mounted() {
-    db.collection("albums")
+    db.collection("projects")
       .get()
       .then(res => {
         res.docs.forEach(({ id }) => {
-          db.collection("albums")
+          db.collection("projects")
             .doc(id)
             .get()
             .then(res => {
-              this.albums.push(res.data());
+              this.projects.push(res.data());
             });
         });
       });

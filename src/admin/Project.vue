@@ -90,7 +90,7 @@ export default {
     saveHandler() {
       this.isLoading = true;
       if (this.isCreate) this.project.id = this.getRandomID;
-      db.collection("albums")
+      db.collection("projects")
         .doc(this.project.id)
         .set(this.project)
         .then(res => {
@@ -113,7 +113,7 @@ export default {
       this.isLoading = false;
       return;
     }
-    db.collection("albums")
+    db.collection("projects")
       .doc(id)
       .get()
       .then(res => {

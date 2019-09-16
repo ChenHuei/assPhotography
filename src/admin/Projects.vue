@@ -91,7 +91,7 @@ export default {
       return `/admin/projects/${id}`;
     },
     remove() {
-      db.collection("albums")
+      db.collection("projects")
         .doc(this.target)
         .delete()
         .then(res => {
@@ -110,7 +110,7 @@ export default {
     fetchData() {
       this.isLoading = true;
       this.initProjects();
-      db.collection("albums")
+      db.collection("projects")
         .get()
         .then(res => {
           const length = res.docs.length;
@@ -120,7 +120,7 @@ export default {
           }
           res.docs.forEach(({ id }, index) => {
             if (id === "default") return;
-            db.collection("albums")
+            db.collection("projects")
               .doc(id)
               .get()
               .then(res => {

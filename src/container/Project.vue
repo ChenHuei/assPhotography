@@ -48,7 +48,7 @@ export default {
     }
   },
   mounted() {
-    db.collection("albums")
+    db.collection("projects")
       .doc(this.$route.params.id)
       .get()
       .then(res => {
