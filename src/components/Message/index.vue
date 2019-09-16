@@ -1,15 +1,16 @@
 <template>
-  <div class="message">
-    <div class="bgc"></div>
+  <Black>
     <div :class="containerClassHandler">
       <h4>{{this.message}}</h4>
     </div>
-  </div>
+  </Black>
 </template>
 
 <script>
+import Black from "../Black";
 export default {
   name: "Message",
+  components: { Black },
   props: {
     message: {
       type: String,
@@ -39,44 +40,30 @@ export default {
 
 <style lang="scss" scoped>
 @import "../../styles/import";
-.message {
-  @include fixed;
-  @include size(100vw, 100vh);
+.container {
+  @include size(40%, 15%);
   @include flexCenter;
-  z-index: 100;
-  > .bgc {
-    @include fixed;
-    @include size(100%);
-    background-color: color(black);
-    opacity: 0.2;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border-radius: 8px;
+  background-color: color(white);
+  box-shadow: 0 2px 8px lighten(color(black), 40);
+  transform: translate(-50%, -50%);
+  transition: 0.5s;
+  z-index: 10;
+  &.moving {
+    top: 25%;
   }
-  > .container {
-    @include size(40%, 15%);
-    @include flexCenter;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    border-radius: 8px;
-    background-color: color(white);
-    box-shadow: 0 2px 8px lighten(color(black), 40);
-    transform: translate(-50%, -50%);
-    transition: 0.5s;
-    z-index: 10;
-    &.moving {
-      top: 25%;
-    }
-    > h4 {
-      margin: 0;
-      font-size: 24px;
-    }
+  > h4 {
+    margin: 0;
+    font-size: 24px;
   }
 }
 
 @media screen and (max-width: 659px) {
-  .message {
-    > .container {
-      @include size(60%, 15%);
-    }
+  .container {
+    @include size(60%, 15%);
   }
 }
 </style>
